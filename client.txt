@@ -1,0 +1,2 @@
+ClientID = 549637919008-v4pctd0atc0i6k8dbvj4c5ad613999pp.apps.googleusercontent.com
+Secret = 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
