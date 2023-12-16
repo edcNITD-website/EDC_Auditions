@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static tailwind_tags %}
+
+{% block content %}
+  <div class="container">
+    <h2>Student Registration</h2>
+    {%crispy form%}
+  </div>
+{% endblock %}
