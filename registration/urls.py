@@ -5,5 +5,8 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('details', views.details, name='details'),
     path('questions', views.ques, name='ques'),
-    path('social/singup',views.signup_redirect,name='signup_redirect'),
+    path('social/signup',views.signup_redirect,name='signup_redirect'),
+    path('club-members',views.club_members,name='club_members'),
+    path('club-members/search/<str:category>/<str:search_term>',views.search,name='search'),
+    path('club-members/inductees/<int:id>',views.student_profile,name='student_profile'),
 ]

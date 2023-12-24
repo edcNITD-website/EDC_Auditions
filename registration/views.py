@@ -1,15 +1,56 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render,redirect, get_object_or_404
+from .models import Inductees,Student,Question, User, Response
 from . forms import BasicDetailsForm, QuestionsForm
-from . models import Student,Question, User, Response
 from django.contrib.auth.decorators import login_required
-
-# Create your views here.
 
 def home(request):
     return render(request,'home.html')
 
 def signup_redirect(request):
-    return render(request,'home.html')
+    return redirect('home')
+
+def club_members(request):
+    user = request.user
+    if user.is_authenticated:
+        is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
+        if is_club_member:
+            students = Inductees.objects.filter(is_club_member=False)
+            return render(request, 'admin.html',{'students':students})
+    return redirect('home')
+
+def search(request,search_term="",category=""):
+    user = request.user
+    students = []
+    if user.is_authenticated:
+        is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
+        if is_club_member:
+            if request.method == "GET":
+                if category == "name":
+                    if search_term == "":
+                        students = Inductees.objects.filter(is_club_member=False)
+                    else:
+                        students = Inductees.objects.filter(is_club_member=False,full_name__icontains=search_term)
+                elif category == "roll":
+                    if search_term == "":
+                        students = Inductees.objects.filter(is_club_member=False)
+                    else:
+                        students = Inductees.objects.filter(is_club_member=False,rollnumber__icontains=search_term)
+                elif category == "branch":
+                    if search_term == "":
+                        students = Inductees.objects.filter(is_club_member=False)
+                    else:
+                        students = Inductees.objects.filter(is_club_member=False,department__icontains=search_term)
+            return render(request, 'admin.html',{'students':students})
+    return redirect('home')
+
+def student_profile(request,id):
+    user = request.user
+    if user.is_authenticated:
+        is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
+        if is_club_member:
+            student = Inductees.objects.get(id=id)
+            return render(request,'student_profile.html',{'student':student})
+    return redirect('home')
 
 @login_required
 def details(request):
@@ -26,7 +67,7 @@ def details(request):
                 student.branch = form.cleaned_data['branch']
                 student.place = form.cleaned_data['place']
                 student.save()
-                return redirect('/questions')
+                return redirect('ques')
             else :
                 student = Student(
                     user = request.user,
@@ -39,7 +80,7 @@ def details(request):
                     place = form.cleaned_data['place']
                 )
                 student.save()
-                return redirect('/questions')
+                return redirect('ques')
     else:
         if Student.objects.filter(user=request.user).exists():
             student = get_object_or_404(Student, user = request.user)
@@ -92,4 +133,4 @@ def ques(request):
                 form = QuestionsForm()
             return render(request, 'questions.html', {'form' : form})
     else:
-        return redirect('/details')
+        return redirect('details')
