@@ -1,6 +1,10 @@
 from django.contrib import admin
 from . import models
 
+admin.site.register(models.Student)
+admin.site.register(models.Question)
+admin.site.register(models.Response)
+
 class InducteesAdmin(admin.ModelAdmin):
     list_display = ('user','rollnumber','department','is_club_member','profile_picture','full_name','phone_number','year')
     list_filter = ('is_club_member','year')
