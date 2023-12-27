@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Inductees,Student,Question, User, Response
-from . forms import BasicDetailsForm, QuestionsForm
+from .models import Inductees,Question, Response, Posts
+from . forms import BasicDetailsForm, QuestionsForm, PostsForm
 from django.contrib.auth.decorators import login_required
 
 def home(request):
@@ -49,7 +49,22 @@ def student_profile(request,id):
         is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
         if is_club_member:
             student = Inductees.objects.get(id=id)
-            return render(request,'student_profile.html',{'student':student})
+            comments = Posts.objects.filter(user=student)
+            answers = Response.objects.filter(student=student)
+            form = PostsForm(request.POST)
+            allow = Inductees.objects.get(user = user).year
+            print(allow)
+            if form.is_valid():
+                post = Posts(
+                    user = student,
+                    comment = form.cleaned_data['comment'],
+                    round = form.cleaned_data['round'],
+                    by = Inductees.objects.get(user = user).full_name,
+                    year = Inductees.objects.get(user = user).year,
+                )
+                post.save()
+                return redirect('student_profile',id=id)
+            return render(request,'student_profile.html',{'student':student,'comments':comments, 'form':form, 'answers':answers, 'allow':allow})
     return redirect('home')
 
 @login_required
@@ -57,41 +72,32 @@ def details(request):
     if request.method == 'POST':
         form = BasicDetailsForm(request.POST)
         if form.is_valid():
-            if Student.objects.filter(user=request.user).exists() :
-                student = get_object_or_404(Student, user = request.user)
-                student.name = form.cleaned_data['name']
-                student.email = form.cleaned_data['email']
+            if Inductees.objects.filter(user=request.user).exists() :
+                student = get_object_or_404(Inductees, user = request.user)
+                student.full_name = form.cleaned_data['name']
                 student.gender = form.cleaned_data['gender']
                 student.registration_no = form.cleaned_data['registration_no']
-                student.roll_no = form.cleaned_data['roll_no']
-                student.branch = form.cleaned_data['branch']
+                student.rollnumber = form.cleaned_data['roll_no']
+                student.department = form.cleaned_data['branch']
                 student.place = form.cleaned_data['place']
+                student.phone_number = form.cleaned_data['Mobile_Number']
+                student.year = form.cleaned_data['year']
                 student.save()
                 return redirect('ques')
-            else :
-                student = Student(
-                    user = request.user,
-                    name = form.cleaned_data['name'],
-                    email = form.cleaned_data['email'],
-                    gender = form.cleaned_data['gender'],
-                    registration_no = form.cleaned_data['registration_no'],
-                    roll_no = form.cleaned_data['roll_no'],
-                    branch = form.cleaned_data['branch'],
-                    place = form.cleaned_data['place']
-                )
-                student.save()
-                return redirect('ques')
+            else:
+                return redirect('home')
     else:
-        if Student.objects.filter(user=request.user).exists():
-            student = get_object_or_404(Student, user = request.user)
+        if Inductees.objects.filter(user=request.user).exists():
+            student = get_object_or_404(Inductees, user = request.user)
             form = BasicDetailsForm(initial={
-            'name': student.name,
-            'email': student.email,
+            'name': student.full_name,
             'gender': student.gender,
             'registration_no': student.registration_no,
-            'roll_no': student.roll_no,
-            'branch': student.branch,
-            'place': student.place
+            'roll_no': student.rollnumber,
+            'branch': student.department,
+            'place': student.place,
+            'Mobile_Number': student.phone_number,
+            'year': student.year,
             })
         else:
             form = BasicDetailsForm()
@@ -99,8 +105,8 @@ def details(request):
 
 @login_required
 def ques(request):
-    if Student.objects.filter(user=request.user).exists():
-        student = get_object_or_404(Student, user = request.user)
+    if Inductees.objects.filter(user=request.user).exists():
+        student = get_object_or_404(Inductees, user = request.user)
         questions = Question.objects.all()
         if request.method == 'POST':        
             form = QuestionsForm(request.POST)
@@ -124,7 +130,7 @@ def ques(request):
        
         else:
             if Response.objects.filter(student=student).exists():
-                responses = get_object_or_404(Student, user = request.user)
+                responses = get_object_or_404(Inductees, user = request.user)
                 formData = {}
                 for q in questions:
                     formData[f'{q.id}'] = get_object_or_404(Response, student= student, question = q).answer

@@ -8,38 +8,29 @@ class Inductees(models.Model):
     department = models.CharField(max_length=50, blank=False, default='National Institute of Technology, Durgapur')
     is_club_member = models.BooleanField(default=False)
     profile_picture = models.URLField(blank=True)
+    gender = models.CharField(max_length=10, choices=[('M','M'),('F','F'),('O','O'),],blank=True)
     full_name = models.CharField(max_length=255, blank=True)
     phone_number = models.CharField(max_length=10, blank=True)
     year = models.IntegerField(default=1)
+    registration_no = models.CharField(max_length=15,blank=True)
+    place = models.CharField(max_length=50,blank=True)
+
+
     def __str__(self):
         return self.user.username + " | " + self.rollnumber
     
 class Posts(models.Model):
     user = models.ForeignKey(Inductees, on_delete=models.CASCADE)
     comment = models.TextField(blank=False)
-    date = models.DateTimeField(auto_now_add=True)
-    status = models.BooleanField(default=True)
+    date = models.DateField(auto_now_add=True)
+    status = models.BooleanField(default=False)
     round = models.IntegerField(default=1)
     by = models.CharField(max_length=255, blank=True)
     year = models.IntegerField(default=2)
     class Meta:
         ordering = ['-round','-date']
-
     def __str__(self):
-        return self.user.username + " | " + self.comment[:50]
-    
-class Student(models.Model):
-    user = models.OneToOneField(User, null=True, blank=False ,on_delete= models.CASCADE)
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    gender = models.CharField(max_length=10, choices=[('M','M'),('F','F'),('O','O'),])
-    registration_no = models.CharField(max_length=15)
-    roll_no = models.CharField(max_length=15)
-    branch = models.CharField(max_length=15)
-    place = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
+        return self.user.full_name + " | " + self.comment[:50]
 
 class Question(models.Model):
     question = models.CharField(max_length=100)
@@ -58,7 +49,7 @@ class Question(models.Model):
         return self.question
 
 class Response(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(Inductees, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer = models.CharField(max_length=100)
     class Meta:

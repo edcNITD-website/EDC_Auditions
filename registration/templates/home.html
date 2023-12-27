@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static tailwind_tags %}
+{% load socialaccount %}
 
 {% block content %}
+<a href="{% provider_login_url 'google' %}?next=/">login with google</a>
 {% endblock content %}
 
 {% block script %}
