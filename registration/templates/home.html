@@ -1,12 +1,183 @@
 {% extends 'base.html' %}
 {% load static tailwind_tags %}
+{% block css %}
+<link href="{% static 'css/sample.css' %}" rel="stylesheet">
 
-{% block content %}
-<div class="container mx-auto">
-    <section class="flex items-center justify-center h-screen bg-blue-500">
-        <h1 class="text-5xl">Django + Tailwind = ❤️</h1>
-    </section>
+{% endblock css %}
+{% block content %} 
+
+<header class="group  w-[100vw]  h-[100vh] ">
+    <div class="md:w-[60%] w-[100%] relative top-1/4 lg:-right-20 text-gradient-to-r from-green-700 via-teal-400 to-blue-500 p-5">
+    <h1 id="text"  class="md:text-[52px] text-[32px] font-[800]" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);"> Welcome to Auditions</h1>
+    <div class="items-center mt-5">
+      <button style="display:inline-block" class="inherit text-center items-center rounded-full whitespace-nowrap md:text-[18px] bg-orange-400 md:pr-8 md:py-3.5 text-[14px] px-5 py-2 font-bold text-black outline-none duration-200 hover:bg-orange-600"> <img src="{% static 'assets/google.png' %}" style="float:left; margin-right:0.5em" class="h-5 w-6"> <a href="#" class=""> Sign Up </a> </button>
+    </div>
+</div>
+   
+</header>
+
+<section class="group md:h-[65vh] h-[75vh] justify-center w-[100%] grid lg:grid-cols-2 sm:grid-cols-1 ">
+  <div class=" section sec-1">
+    <div class="animate">
+        <img src="{% static 'assets/Whyedc.png' %}" alt="" class="mx-auto md:h-[65vh] h-[45vh] p-10 m-0 ">
+    </div>
+    </div>
+    <div id="ani-1" class="p-10 md:pl-0 md:pr-25 section sec-2">
+      <h1 class="text-center md:text-[36px] text-[26px] font-[800] text-white md:pb-3 pb-2 animate"> Why EDC</h1>
+      <p class="text-[aqua] md:text-[22px] text-[14px] animate"> Be a part of Team EDC, NIT Durgapur's Entrepreneurship Development Cell and join us in our mission to promote entrepreneurship, sharpen abilities, and advance professionally with the help of resources, workshops, guidance, connections, and competitions. With us, you will have unlimited potential for advancement and several prospects to flaunt your skills.
+      </p>
+  </div>
+</section>
+
+<section class="group glimpse h-[55vh] overflow-x-hidden">
+<div class="section sec-3">
+<h1 class="text-center text-[36px] text-white pt-10 animate"> Glimpses of our endeavours</h1>
+</div>
+<div class="slider grid place-items-center h-[250px] relative">
+    <div class="slide-track flex w-max" >
+
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+        
+     
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+      <div class="slide h-[280px] w-[300px] py-15 p-4 flex items-center ">
+        <img src="{% static 'assets/mac-2.png' %}" alt="glimpse" class="w-full transition-transform duration-1000">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="domains py-5 mx-auto group">
+  <div class="">
+    <h1 class="text-center text-[36px] font-[800] text-col text-white"> Domains Available </h1>
+  </div>
+    
+    <div id="main" class="ax-w-[1200px] mx-auto py-[30px] grid lg:grid-cols-2 sm:grid-cols-1  text-slate-50">
+
+      <div id="WebD" class="card m-10 group p-10 hover:scale-125">
+          <div>
+          <img class="mx-auto" src="{% static 'assets/webd.gif' %}" alt="..." width=100px height=120px>
+          </div>
+          <h3 class="text-center text-[22px] font-[600] py-2">Web Development</h3>
+          <p class="">Take Advantage of wide range of web development domains in our club and sharpen your skills, access resources and construct your portfolio through various projects.</p>
+      </div>
+
+      <div id="Video" class="card m-10  group  p-10 hover:scale-125">
+          <div>
+          <img class="mx-auto" src="{% static 'assets/video.gif' %}" alt="..." width=100px height=120px>
+          </div>
+          <h3 class="text-center text-[22px]  font-[600] py-2">Video Editing</h3>
+          <p class=""> Our club provides a variety of video domains for you to explore and refine your storytelling abilities, get access to resources, and strengthen your portfolio.</p>
+      </div>
+
+  <div id="Content" class="card m-10  group  p-10 hover:scale-125">
+      <div>
+      <img class="mx-auto" src="{% static 'assets/content.gif' %}" alt="..." width=100px height=120px>
+      </div>
+      <h3 class="text-center text-[22px]  font-[600] py-2">Management & Content writing</h3>
+      <p class=""> We invite you to explore the various writing domains in our club and sharpen your writing skills, gain experience, and enrich your portfolio.</p>
+  </div>
+  <div id="GD" class="card m-10 group p-10 hover:scale-125 ">
+      <div>
+
+      <img class="mx-auto" src="{% static 'assets/gd.gif' %}" alt="..." width=100px height=120px>
+      </div>
+      <h3 class="text-center text-[22px]  font-[600] py-2">Graphic Designing</h3>
+      <p class=""> Take the opportunity to explore the diverse design domains in our club and cultivate your aesthetics, access resources, and expand your portfolio.</p>
+  </div>
+</div>
+</section>
+
+<section id="banner" class="text-center text-white group">
+<h4 class="py-1 pt-6 text-[20px] ">This is from EDC NITD </h4>
+<h2 class="text-[24px] pb-10 ">Unleashing the power of true Entrepreneurial Spirit</h2>
+</section>
+
+
 {% endblock content %}
+<script> 
+  let text = new SplitType('#text');
+  let characters = document.querySelectorAll('.char');
+
+  for(i=0; i<characters.length; i++){
+      characters[i].classList.add('translate-y-full')
+  }
+  gsap.to('.char',{
+      y: 0,
+      stagger: 0.05,
+      delay:0.5,
+      duration: 1,
+  })
+
+let sections = document.querySelectorAll('.section');
+
+window.onscroll = () => {
+  sections.forEach(sec => {
+      let top = window.scrollY;
+      let offset = sec.offsetTop - 275;
+      let height = sec.offsetHeight;
+
+      if (top >= offset && top < offset + height){
+          sec.classList.add('show-animate');
+      }
+      // if want to use repeating animation on scroll, use this
+      else {
+          sec.classList.remove('show-animate');
+      }
+  })
+}
+
+</script>
 
 {% block script %}
 <script src="{% static 'js/sample.js' %}"></script>

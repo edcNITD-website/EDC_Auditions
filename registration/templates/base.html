@@ -6,15 +6,17 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="https://unpkg.com/split-type"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,100;1,200&display=swap" rel="stylesheet">
+
 		{% tailwind_css %}
+		{% block css %}
+		{% endblock css %}
 	</head>
 
-	<body class="bg-gray-50 font-serif leading-normal tracking-normal">
-		<div class="container mx-auto">
-			<section class="flex items-center justify-center h-screen">
-				<h1 class="text-5xl">Django + Tailwind = ❤️</h1>
-			</section>
-		</div>
+	<body class="overflow-x-hidden font-[Poppins] leading-normal tracking-normal">
+		
 		{% block content %}
 		{% endblock content %}
 		{% block script %}
