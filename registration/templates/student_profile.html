@@ -13,6 +13,20 @@
     <div class="max-w-lg mx-auto my-10 bg-white/10 rounded-lg shadow-md p-5">
         <img class="w-32 h-32 rounded-full mx-auto" src="{{ student.profile_picture }}" alt="Profile picture">
         <h2 class="text-center text-2xl font-semibold mt-3"><i class="fa-solid fa-user"></i>&NonBreakingSpace;&NonBreakingSpace;{{student.full_name}}</h2>
+        <div class="flex justify-end mt-5 ">
+            <form action="{% url 'like_student' student.pk %}" method="POST">
+                {% csrf_token %}
+                {% if liked %}
+                <button type="submit" value="{{ student.id }}" class="bg-[#54575F] bg-clip-border px-3 py-2 shadow-3xl shadow-shadow-500  hover:scale-105 transition duration-500 rounded-xl">
+                    <i class="fa-solid fa-heart" style="color: #ff2d75;"></i>&NonBreakingSpace;&NonBreakingSpace;{{ likes }}
+                </button>
+                {% else %}
+                <button type="submit" value="{{ student.id }}" class="bg-[#54575F] bg-clip-border px-3 py-2 rounded-xl hover:scale-105 transition duration-500 ">
+                    <i class="fa-solid fa-heart" ></i>&NonBreakingSpace;&NonBreakingSpace;{{ likes }}
+                </button>
+                {% endif %}
+            </form>
+        </div>
         <div class="mt-5">
           <h3 class="text-xl font-semibold"><i class="fa-regular fa-id-card"></i>&NonBreakingSpace;&NonBreakingSpace;General Info</h3>
           <div class="grid grid-cols-2 gap-4 px-2 w-full mt-5 mb-5">
@@ -35,9 +49,9 @@
             </p>
             </div>
             <div class="flex flex-col items-start justify-center rounded-2xl bg-[#54575F] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
-                <p class="text-sm text-white opacity-50">Year</p>
+                <p class="text-sm text-white opacity-50">Qualified for Round</p>
                 <p class="text-base font-medium text-navy-700 dark:text-white">
-                    {{student.year}}
+                    Round {{student.round}}
                 </p>
             </div>
             <div class="flex flex-col justify-center rounded-2xl bg-[#54575F] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
@@ -70,7 +84,9 @@
             </div>
             {% endfor %}
          </div>
-         {% crispy form %}
+         <div class="flex flex-col w-full justify-center">
+            {% crispy form %}
+         </div>
         </div>
         
     </div>
@@ -82,7 +98,7 @@
         <h3 class="text-xl font-semibold"><i class="fa-solid fa-star"></i>&NonBreakingSpace;&NonBreakingSpace;Incredibles</h3>
     </div>
     <div id="comments" class="flex flex-wrap justify-center md:flex-wrap md:space-x-6 mb-36 group">
-        {% for comment in comments %}
+        {% for comment in comments2 %}
         <a
         class="w-full relative block p-8 overflow-hidden bg-white/10 md:w-1/3 border-slate-100 rounded-lg md:ml-6 mb-10 "
         href=""
@@ -123,7 +139,7 @@
             <h3 class="text-xl font-semibold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>&NonBreakingSpace;&NonBreakingSpace;Incredibles</h3>
         </div>
         <div id="comments" class="flex flex-wrap justify-center md:flex-wrap md:space-x-6 mb-36 group">
-            {% for comment in comments %}
+            {% for comment in comments3 %}
             <a
             class="w-full relative block p-8 overflow-hidden bg-white/10 md:w-1/3 border-slate-100 rounded-lg md:ml-6 mb-10 "
             href=""
@@ -164,7 +180,7 @@
                 <h3 class="text-xl font-semibold"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>&NonBreakingSpace;&NonBreakingSpace;Incredibles</h3>
             </div>
             <div id="comments" class="flex flex-wrap justify-center md:flex-wrap md:space-x-6 mb-36 group">
-                {% for comment in comments %}
+                {% for comment in comments4 %}
                 <a
                 class="w-full relative block p-8 overflow-hidden bg-white/10 md:w-1/3 border-slate-100 rounded-lg md:ml-6 mb-10 "
                 href=""

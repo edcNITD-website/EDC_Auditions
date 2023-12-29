@@ -14,6 +14,11 @@ class Inductees(models.Model):
     year = models.IntegerField(default=1)
     registration_no = models.CharField(max_length=15,blank=True)
     place = models.CharField(max_length=50,blank=True)
+    round = models.IntegerField(default=1)
+    like = models.ManyToManyField(User, related_name='vote')
+
+    def total_likes(self):
+        return self.like.count()
 
 
     def __str__(self):

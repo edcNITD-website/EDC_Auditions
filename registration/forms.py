@@ -52,9 +52,9 @@ class PostsForm(forms.Form):
         self.helper = FormHelper(self)      
         self.helper.form_show_labels = False
         self.helper.form_show_errors = False
-        self.helper.form_class = 'flex flex-wrap justify-center items-center w-full '
+        self.helper.form_class = 'flex flex-wrap justify-center items-center w-full gap-4'
         self.helper.layout = Layout(
-            Field('comment', css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none'),
-            Field('round', css_class='mx-5 border border-none rounded-xl bg-[#18191b] focus:outline-none focus:border-none '),
-            Submit('submit', 'Comment', css_class='p-2 mt-6 bg-white/10 text-white rounded-md mx-auto')
+            Field('comment', css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none w-80 h-12'),
+            Field('round', css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none focus:border-none '),
+            Submit('submit', 'Comment', css_class='p-2  text-white rounded-md font-bold bg-white/10 ')
         )

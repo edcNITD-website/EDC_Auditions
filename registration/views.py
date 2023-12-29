@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .models import Inductees,Question, Response, Posts
 from . forms import BasicDetailsForm, QuestionsForm, PostsForm
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def home(request):
     return render(request,'home.html')
@@ -50,9 +52,13 @@ def student_profile(request,id):
         if is_club_member:
             student = Inductees.objects.get(id=id)
             comments = Posts.objects.filter(user=student)
+            likes = student.total_likes()
             answers = Response.objects.filter(student=student)
             form = PostsForm(request.POST)
             allow = Inductees.objects.get(user = user).year
+            liked = False
+            if student.like.filter(id=user.id).exists():
+                liked = True
             print(allow)
             if form.is_valid():
                 post = Posts(
@@ -64,7 +70,7 @@ def student_profile(request,id):
                 )
                 post.save()
                 return redirect('student_profile',id=id)
-            return render(request,'student_profile.html',{'student':student,'comments':comments, 'form':form, 'answers':answers, 'allow':allow})
+            return render(request,'student_profile.html',{'student':student,'comments2':comments.filter(year = 2),'comments3':comments.filter(year=3),'comments4':comments.filter(year=4), 'form':form, 'answers':answers, 'allow':allow,'likes':likes,'liked':liked})
     return redirect('home')
 
 @login_required
@@ -140,3 +146,21 @@ def ques(request):
             return render(request, 'questions.html', {'form' : form})
     else:
         return redirect('details')
+    
+
+@login_required
+def like(request,id):
+    user = request.user
+    if user.is_authenticated:
+        is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
+        if is_club_member:
+            student = Inductees.objects.get(id=id)
+            liked = False
+            if student.like.filter(id=user.id).exists():
+                student.like.remove(user)
+                liked = False
+            else:
+                liked = True
+                student.like.add(user)
+            return HttpResponseRedirect(reverse('student_profile', args=[str(id)]))
+    return redirect('home')

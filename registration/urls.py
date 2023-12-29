@@ -9,4 +9,5 @@ urlpatterns = [
     path('club-members',views.club_members,name='club_members'),
     path('club-members/search/<str:category>/<str:search_term>',views.search,name='search'),
     path('club-members/inductees/<int:id>',views.student_profile,name='student_profile'),
+    path('like/<int:id>',views.like,name='like_student'),
 ]
