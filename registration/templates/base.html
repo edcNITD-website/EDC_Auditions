@@ -8,7 +8,6 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% load socialaccount %}
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://unpkg.com/split-type"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
@@ -27,7 +26,7 @@
             href="#">
             <img
               class="mr-2 h-16"
-              src="{% static 'assets/edc-logo.png ' %}"
+              src="{% static 'assets/edc-logo.png' %}"
               alt="TE Logo"
               loading="lazy" />
           </a>
@@ -118,9 +117,8 @@
             <li><a href="#contact" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300  font-mono font-extrabold text-white">RESULTS</a></li>
           </ul>
     </div>
-    <div>.</div>
     {% block content %}
-		{% endblock content %}
+	{% endblock content %}
      <footer class="relative bg-zinc-800 pt-8 pb-6">
        <div class="container mx-auto px-4">
          <div class="flex flex-wrap text-left lg:text-left">
@@ -199,9 +197,10 @@
          </div>
        </div> 
       </footer>  
-  <script src="sample.js"></script>
-  {% block script %}
-  {% endblock script %}
-	</body>
+	<script src="{% static 'js/sample.js' %}"></script>
+	<script src="{% static 'js/website.js' %}"></script>
+	{% block script %}
+	{% endblock script %}
+  </body>
 </html>
 
