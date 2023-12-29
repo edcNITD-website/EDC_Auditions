@@ -2,7 +2,6 @@
 {% load static tailwind_tags %}
 {% block css %}
 <link href="{% static 'css/sample.css' %}" rel="stylesheet">
-
 {% endblock css %}
 {% block content %} 
 
@@ -142,9 +141,9 @@
 <h4 class="py-1 pt-6 text-[20px] ">This is from EDC NITD </h4>
 <h2 class="text-[24px] pb-10 ">Unleashing the power of true Entrepreneurial Spirit</h2>
 </section>
-
-
 {% endblock content %}
+
+{% block script %}
 <script> 
   let text = new SplitType('#text');
   let characters = document.querySelectorAll('.char');
@@ -176,9 +175,5 @@ window.onscroll = () => {
       }
   })
 }
-
 </script>
-
-{% block script %}
-<script src="{% static 'js/sample.js' %}"></script>
 {% endblock script %}
