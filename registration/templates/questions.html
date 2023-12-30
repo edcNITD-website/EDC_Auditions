@@ -1,14 +1,43 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% load static tailwind_tags %}
-
+{% block css %}
+<style>
+.asteriskField{
+display: none;
+}
+.requiredField{
+font-size: 1.2rem;
+font-weight: 600;
+}
+input{
+    width: 75vw;
+}
+.textinput{
+    background-color: #18191b;
+    border-radius: 10px;
+    border: none;
+    margin-top: 2vh;
+    height: 8vh;
+}
+.numberinput{
+    background-color: linear-gradient(to right, #18191b, #18191b);
+    border-radius: 10px;
+    border: none;
+    margin-top: 2vh;
+    height: 8vh;
+}
+</style>
+{% endblock css %}
 {% block content %}
-<main class="overflow-hidden flex flex-1 flex-col bg-[#18191b] text-white justify-center items-center">
-<div class="container bg-[#18191b] p-20 flex flex-col">
-  <h2 class="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-green-700 via-teal-400 via-teal-400 via-teal-400 to-blue-500 text-transparent bg-clip-text hover:bg-gradient-to-l ">
-      Quest for your Perspective
-  </h2>
-      {% crispy form %}
-</div>
+<main class="overflow-hidden flex flex-1 flex-col bg-[#18191b] text-white justify-center ">
+    <div class="container bg-[#18191b] p-6 mt-8 flex flex-col justify-center items-center mx-auto ">
+        <h2 class="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text hover:bg-gradient-to-l ">
+            Quest for the Best
+        </h2>
+        <div class="w-full relative block p-10 overflow-hidden bg-white/10 border-slate-100 rounded-lg mb-10 ">
+            <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 to-blue-500 hover:bg-gradient-to-l"></span>
+            {% crispy form %}
+        </div>
+    </div>
 </main>
 {% endblock %}

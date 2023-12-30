@@ -80,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-CRISPY_TEMPLATE_PACK = 'uni_form'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_FAIL_SILENTLY = not DEBUG
 
 WSGI_APPLICATION = 'audition.wsgi.application'

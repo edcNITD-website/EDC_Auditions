@@ -93,3 +93,7 @@ p{
 .sec-4.show-animate .showRight-animate{
     width: 0;
 }
+
+.asteriskField{
+    color: red;
+}

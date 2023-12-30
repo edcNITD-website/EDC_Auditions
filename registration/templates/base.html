@@ -3,20 +3,19 @@
 <html lang="en">
 	<head>
     <title>Django Tailwind</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    {% load socialaccount %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://unpkg.com/split-type"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
-		<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,100;1,200&display=swap" rel="stylesheet">
-		{% tailwind_css %}
-		{% block css %}
-		{% endblock css %}
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  {% load socialaccount %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://unpkg.com/split-type"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+	{% tailwind_css %}
+	{% block css %}
+	{% endblock css %}
   </head>
-  <body class="overflow-x-hidden font-[Poppins] leading-normal tracking-normal text-white " >
+  <body class="overflow-x-hidden leading-normal tracking-normal text-white " >
   <nav
     class="flex-no-wrap relative flex w-full items-center justify-between py-2 bg-zinc-800  lg:flex-wrap lg:justify-start lg:py-4">
     <div class="flex w-full flex-wrap items-center justify-between px-3">
@@ -59,13 +58,10 @@
       <div
         class="flex-grow hidden lg:flex items-center"
         id="navbarSupportedContent1">
-        
-  
         <ul
           class="list-style-none ml-auto flex flex-col pl-0 lg:flex-row font-bold menu"
           data-te-navbar-nav-ref>
           <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-           
             <a
               class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
               href="#"
@@ -203,4 +199,3 @@
 	{% endblock script %}
   </body>
 </html>
-

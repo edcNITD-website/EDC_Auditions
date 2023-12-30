@@ -1,14 +1,32 @@
     {% extends 'base.html' %}
-
     {% load crispy_forms_tags %}
-    
+    {% block css %}
+    <style>
+    .asteriskField{
+    display: none;
+    }
+    .requiredField{
+    font-size: 1.4rem;
+    font-weight: 800;
+    }
+    input{
+        width: 70vw;
+    }
+    #id_gender,#id_year{
+        width: 25vw;
+    }
+    </style>
+    {% endblock css %}
     {% block content %}
     <main class="overflow-hidden flex flex-1 flex-col bg-[#18191b] text-white justify-center ">
-        <div class="container bg-[#18191b] p-20 flex flex-col justify-center items-center">
+        <div class="container bg-[#18191b] p-6 mt-8 flex flex-col justify-center items-center mx-auto ">
             <h2 class="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text hover:bg-gradient-to-l ">
                 Student Registration
             </h2>
+            <div class="w-full relative block p-6 overflow-hidden bg-white/10 border-slate-100 rounded-lg md:ml-6 mb-10 ">
+                <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 to-blue-500 hover:bg-gradient-to-l"></span>
                 {% crispy form %}
+            </div>
         </div>
     </main>
     {% endblock %}

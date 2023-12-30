@@ -16,15 +16,16 @@ class BasicDetailsForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(BasicDetailsForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
+        self.helper.form_class = 'flex flex-col justify-center items-center gap-4'
         self.helper.layout = Layout(
-            'name',
-            'gender',
-            'registration_no',
-            'roll_no',
-            'branch',
-            'place',
-            'Mobile_Number',
-            'year',
+            Field('name',css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none h-12'),
+            Field('registration_no',css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none h-12'),
+            Field('roll_no',css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none h-12'),
+            Field('branch',css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none h-12'),
+            Field('place',css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none h-12'),
+            Field('Mobile_Number',css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none h-12'),
+            Field('gender',css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none h-12'),
+            Field('year',css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none h-12'),
             Submit('submit', 'Submit', css_class='p-2 mt-6 bg-white/10 text-white rounded-md mx-auto')
         )
 
@@ -42,7 +43,8 @@ class QuestionsForm(forms.Form):
             elif question.type == "options":
                 self.fields[f'{question.id}'] = forms.ChoiceField(label=question.question, choices=extra.get('choice'),)
         self.helper = FormHelper(self)        
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.form_class = 'flex flex-wrap justify-center items-center w-full gap-4'
+        self.helper.add_input(Submit('submit', 'Submit',css_class='p-2  text-white rounded-md font-bold bg-white/10 '))
 
 class PostsForm(forms.Form):
     comment = forms.CharField(label='', max_length=500, empty_value='Write your comment here')
@@ -51,7 +53,6 @@ class PostsForm(forms.Form):
         super(PostsForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)      
         self.helper.form_show_labels = False
-        self.helper.form_show_errors = False
         self.helper.form_class = 'flex flex-wrap justify-center items-center w-full gap-4'
         self.helper.layout = Layout(
             Field('comment', css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none w-80 h-12'),
