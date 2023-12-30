@@ -2,6 +2,7 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Submit,Field
 from registration.models import Question
+import ast
 
 class BasicDetailsForm(forms.Form):
     name = forms.CharField(label='First Name', max_length=100)
@@ -41,7 +42,9 @@ class QuestionsForm(forms.Form):
             elif question.type == "range":
                 self.fields[f'{question.id}'] = forms.IntegerField(label=question.question, widget=forms.widgets.NumberInput(attrs={'type': 'range', 'min': extra.get('min'), 'max': extra.get('max')}))
             elif question.type == "options":
-                self.fields[f'{question.id}'] = forms.ChoiceField(label=question.question, choices=extra.get('choice'),)
+                options_string = extra.get('choice')
+                options = ast.literal_eval(options_string)
+                self.fields[f'{question.id}'] = forms.ChoiceField(label=question.question, choices=options,)
         self.helper = FormHelper(self)        
         self.helper.form_class = 'flex flex-wrap justify-center items-center w-full gap-4'
         self.helper.add_input(Submit('submit', 'Submit',css_class='p-2  text-white rounded-md font-bold bg-white/10 '))
