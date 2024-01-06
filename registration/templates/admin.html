@@ -4,6 +4,34 @@
 
 {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .shine:hover{
+        transition: all 0.3s ease;
+        background: linear-gradient(90deg, #2b2e33, #1e1e1e, white);
+        background-size: 200% 200%;
+    }
+    .circle-red{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #d22b2b;
+        margin: 4px;
+    }
+    .circle-yellow{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #fbff16;
+        margin: 4px;
+    }
+    .circle-green{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #7fff16;
+        margin: 4px;
+    }
+</style>
 {% endblock css %}
 
 {% block content %}
@@ -49,8 +77,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="flex items-center justify-center">
+                            <div class="flex flex-row gap-4">
+                                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(1)">
+                                    <div class="circle-red"></div>
+                                </div>
+                                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(2)">
+                                    <div class="circle-yellow"></div>
+                                </div>
+                                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(3)">
+                                    <div class="circle-green"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
                 <div id="students" class="flex flex-wrap justify-center mt-48 md:flex md:flex-wrap mb-36 group">
                     {% for student in students %}
                         <div id="student" data-student-id="{{ student.id }}"
@@ -136,5 +179,22 @@
             window.location.href = "/club-members/inductees/" + student.dataset.studentId;
         });
     });
+
+    function filter(id){
+        switch(id){
+            case 1:
+                window.location.href = "/club-members/filter/1";
+                break;
+            case 2:
+                window.location.href = "/club-members/filter/2";
+                break;
+            case 3:
+                window.location.href = "/club-members/filter/3";
+                break;
+            default:
+                window.location.href = "/club-members";
+                break;
+        }
+    }
 </script>
 {% endblock script %}

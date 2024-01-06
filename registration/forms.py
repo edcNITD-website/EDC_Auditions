@@ -46,8 +46,8 @@ class QuestionsForm(forms.Form):
                 options = ast.literal_eval(options_string)
                 self.fields[f'{question.id}'] = forms.ChoiceField(label=question.question, choices=options,)
         self.helper = FormHelper(self)        
-        self.helper.form_class = 'flex flex-wrap justify-center items-center w-full gap-4'
-        self.helper.add_input(Submit('submit', 'Submit',css_class='p-2  text-white rounded-md font-bold bg-white/10 '))
+        self.helper.form_class = 'flex flex-wrap justify-start items-start w-full gap-4'
+        self.helper.add_input(Submit('submit', 'Submit',css_class='p-2  text-white rounded-md font-bold bg-white/10 mt-10'))
 
 class PostsForm(forms.Form):
     comment = forms.CharField(label='', max_length=500, empty_value='Write your comment here')
@@ -58,7 +58,9 @@ class PostsForm(forms.Form):
         self.helper.form_show_labels = False
         self.helper.form_class = 'flex flex-wrap justify-center items-center w-full gap-4'
         self.helper.layout = Layout(
+
             Field('comment', css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none w-80 h-12'),
             Field('round', css_class='border border-none rounded-xl bg-[#18191b] focus:outline-none focus:border-none '),
             Submit('submit', 'Comment', css_class='p-2  text-white rounded-md font-bold bg-white/10 ')
         )
+

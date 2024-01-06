@@ -16,7 +16,7 @@ def club_members(request):
     if user.is_authenticated:
         is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
         if is_club_member:
-            students = Inductees.objects.filter(is_club_member=False)
+            students = Inductees.objects.filter(is_club_member=False).order_by('-round')
             return render(request, 'admin.html',{'students':students})
     return redirect('home')
 
@@ -31,17 +31,17 @@ def search(request,search_term="",category=""):
                     if search_term == "":
                         students = Inductees.objects.filter(is_club_member=False)
                     else:
-                        students = Inductees.objects.filter(is_club_member=False,full_name__icontains=search_term)
+                        students = Inductees.objects.filter(is_club_member=False,full_name__icontains=search_term).order_by('-round')
                 elif category == "roll":
                     if search_term == "":
                         students = Inductees.objects.filter(is_club_member=False)
                     else:
-                        students = Inductees.objects.filter(is_club_member=False,rollnumber__icontains=search_term)
+                        students = Inductees.objects.filter(is_club_member=False,rollnumber__icontains=search_term).order_by('-round')
                 elif category == "branch":
                     if search_term == "":
                         students = Inductees.objects.filter(is_club_member=False)
                     else:
-                        students = Inductees.objects.filter(is_club_member=False,department__icontains=search_term)
+                        students = Inductees.objects.filter(is_club_member=False,department__icontains=search_term).order_by('-round')
             return render(request, 'admin.html',{'students':students})
     return redirect('home')
 
@@ -70,7 +70,7 @@ def student_profile(request,id):
                 )
                 post.save()
                 return redirect('student_profile',id=id)
-            return render(request,'student_profile.html',{'student':student,'comments2':comments.filter(year = 2),'comments3':comments.filter(year=3),'comments4':comments.filter(year=4), 'form':form, 'answers':answers, 'allow':allow,'likes':likes,'liked':liked})
+            return render(request,'student_profile.html',{'student':student,'comments2':comments.filter(year = 2).order_by('-round'),'comments3':comments.filter(year=3).order_by('-round'),'comments4':comments.filter(year=4).order_by('-round'), 'form':form, 'answers':answers, 'allow':allow,'likes':likes,'liked':liked})
     return redirect('home')
 
 @login_required
@@ -164,3 +164,18 @@ def like(request,id):
                 student.like.add(user)
             return HttpResponseRedirect(reverse('student_profile', args=[str(id)]))
     return redirect('home')
+
+@login_required
+def filter(request,type):
+    user = request.user
+    if user.is_authenticated:
+        is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
+        students = []
+        if is_club_member:
+            if request.method=='GET':
+                students = Inductees.objects.filter(is_club_member=False,color = type).order_by('-round')
+            return render(request, 'admin.html',{'students':students})
+        else:
+            return redirect('home')
+    else:
+        return redirect('home')

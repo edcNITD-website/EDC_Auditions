@@ -16,6 +16,7 @@ class Inductees(models.Model):
     place = models.CharField(max_length=50,blank=True)
     round = models.IntegerField(default=1)
     like = models.ManyToManyField(User, related_name='vote')
+    color=models.IntegerField(choices=[(1,'red'),(2,'yellow'),(3,'green'),(4,'transparent')],default=4)
 
     def total_likes(self):
         return self.like.count()
