@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <style>
+    body {
+      background-color: #0e1117; /* Dark background color */
+      color: #c9d1d9; /* Light text color */
+    }
+
+    .bg-white {
+      background-color: #1f2937; /* Darker background for white containers */
+    }
+
+    /* Hover effect with the color #115483 */
+    .entry:hover {
+      background-color: #115483;
+    }
+
+    /* Shadow effect for each row with the color #1affb2 */
+    .entry {
+      box-shadow: 0 4px 8px rgba(176, 221, 235, 0.1); /* Shadow color: #1affb2 with reduced opacity */
+    }
+
+    /* Gradient text color for the title */
+    .gradient-text {
+      background: linear-gradient(to right, #34d399, #6ee7b7, #60a5fa);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+  </style>
+  <title>Results for Round 1</title>
+</head>
+<body class="w-full h-full">
+  <div class="flex flex-col items-center max-w-3xl m-auto mt-8 animate__animated animate__fadeIn animate__delay-1s">
+    <h3 class="text-green-500 p-0 font-bold text-2xl mb-4 animate__animated animate__fadeInUpBig gradient-text">Results for Round 1</h3>
+  </div>
+
+  <div id="leaderboard" class="max-w-xl overflow-y-auto mx-auto mt-4 p-4 bg-white rounded shadow animate__animated animate__fadeIn animate__delay-2s">
+    <!-- Labels for Student and Round -->
+    <div id="labels" class="flex flex-row justify-between mb-4">
+      <div>Student</div>
+      <div>Roll</div>
+    </div>
+
+    <!-- No results found message -->
+    <div id="noResultsMessage" class="px-4 py-2 text-center">
+      No results found
+    </div>
+    <!-- Entries will be dynamically added here -->
+  </div>
+
+  <script src="../static/js/results.js"></script>
+</body>
+</html>
