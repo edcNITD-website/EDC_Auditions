@@ -9,7 +9,10 @@ def home(request):
     return render(request,'home.html')
 
 def signup_redirect(request):
-    return redirect('home')
+    return render(request,'home.html')
+
+def results(request):
+    return render(request,'results.html')
 
 def club_members(request):
     user = request.user
