@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tailwind_tags %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .shine:hover{
+        transition: all 0.3s ease;
+        background: linear-gradient(90deg, #2b2e33, #1e1e1e, white);
+        background-size: 200% 200%;
+    }
+    .circle-red{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #d22b2b;
+        margin: 4px;
+    }
+    .circle-yellow{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #fbff16;
+        margin: 4px;
+    }
+    .circle-green{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #7fff16;
+        margin: 4px;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+<main class="overflow-hidden flex flex-1 flex-col bg-[#18191b] text-white">
+    <div class="relative overflow-none">
+        <section class="bg-[#18191b] lg:pt-12 md:pt-6 items-center justify-center">
+            <div class="max-w-8xl px-5 mx-auto mt-32 text-center ">
+                <h2 class="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text hover:bg-gradient-to-l ">
+                    Registered Inductees
+                </h2>
+                <div class="flex justify-center items-center">
+                    <div class="space-y-5">
+                        <div class="flex flex-col relative ">
+                            <div class="flex flex-row items-center justify-center p-4 space-x-4 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500 mb-10">
+                                    <div class="justify-evenly p-2 rounded-lg bg-gray-100 mx-auto">
+                                        <input id="search" type="text" class=" w-60 border-none bg-gray-100 md:w-full text-black focus:ring-gray-100 focus:ring-2" placeholder="Search">
+                                    </div>
+                                    <div class="relative flex items-center rounded-lg">
+                                        <button onclick="search()" class="bg-gray-600 w-12 h-12 flex items-center justify-center font-bold rounded-lg tracking-wider">
+                                            <img src="{% static 'assets/search.svg' %}" style="width: 20px;" alt="">
+                                        </button>
+                                    </div>
+                            </div>
+                            <div class="absolute right-6 -bottom-10 inline-block text-left justify-end">
+                                <button id="dropdown-button" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-white/10 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-white/10 border-none">
+                                        <span id="select-option">Name</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                            <path fill-rule="evenodd" d="M6.293 9.293a1 1 0 011.414 0L10 11.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                </button>
+                                <div id="dropdown-menu" class="origin-top-right absolute -left-20 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                    <div class="py-2 p-2" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-button">
+                                        <a id="name-option" class="flex block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer" role="menuitem">
+                                            <svg class="mr-2" height="24px" width="24px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#383838;} </style> <g> <path class="st0" d="M256,265.308c73.252,0,132.644-59.391,132.644-132.654C388.644,59.412,329.252,0,256,0 c-73.262,0-132.643,59.412-132.643,132.654C123.357,205.917,182.738,265.308,256,265.308z"></path> <path class="st0" d="M425.874,393.104c-5.922-35.474-36-84.509-57.552-107.465c-5.829-6.212-15.948-3.628-19.504-1.427 c-27.04,16.672-58.782,26.399-92.819,26.399c-34.036,0-65.778-9.727-92.818-26.399c-3.555-2.201-13.675-4.785-19.505,1.427 c-21.55,22.956-51.628,71.991-57.551,107.465C71.573,480.444,164.877,512,256,512C347.123,512,440.427,480.444,425.874,393.104z"></path> </g> </g></svg>Name
+                                        </a>
+                                        <a id="roll-option" class="flex block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer" role="menuitem">
+                                            <svg class="mr-2" height="24px" width="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M3.5 7V17C3.5 18.1046 4.39543 19 5.5 19H19.5C20.6046 19 21.5 18.1046 21.5 17V7C21.5 5.89543 20.6046 5 19.5 5H5.5C4.39543 5 3.5 5.89543 3.5 7Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M15.5 10H18.5" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path> <path d="M15.5 13H18.5" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5 10C11.5 11.1046 10.6046 12 9.5 12C8.39543 12 7.5 11.1046 7.5 10C7.5 8.89543 8.39543 8 9.5 8C10.0304 8 10.5391 8.21071 10.9142 8.58579C11.2893 8.96086 11.5 9.46957 11.5 10Z" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M5.5 16C8.283 12.863 11.552 13.849 13.5 16" stroke="#000000" stroke-width="1.5" stroke-linecap="round"></path> </g></svg> Roll Number
+                                        </a>
+                                        <a id="branch-option" class="flex block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer" role="menuitem">
+                                            <svg class="mr-2" height="24px" width="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" mirror-in-rtl="true" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#494c4e" d="M6 18H1a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1zM17 18h-5a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1zM6 7H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1zM17.708 5.24l-3.535 3.535a1 1 0 0 1-1.414 0L9.224 5.24a1 1 0 0 1 0-1.413L12.76.292a1 1 0 0 1 1.414 0l3.535 3.535a1 1 0 0 1-.002 1.414z"></path> </g></svg> Branch
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <div class="flex flex-row gap-4">
+                                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(1)">
+                                    <div class="circle-red"></div>
+                                </div>
+                                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(2)">
+                                    <div class="circle-yellow"></div>
+                                </div>
+                                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(3)">
+                                    <div class="circle-green"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="students" class="flex flex-wrap justify-center mt-48 md:flex md:flex-wrap mb-36 group">
+                    {% for student in students %}
+                        <div id="student" data-student-id="{{ student.id }}"
+                        class="w-full flex flex-col items-center p-6 md:mr-5 space-y-6 mb-10 rounded-xl bg-white/10 md:w-1/4 cursor-pointer group-hover:blur-sm hover:!blur-none group-hover:scale-[0.85] hover:!scale-100 duration-500 ">
+                        <img src="{{ student.profile_picture }}" class="w-16 -mt-14 rounded-full" alt="">
+                        <h5 class="text-lg font-bold text-white ">{{ student.full_name }}</h5>
+                        <p class="text-sm text-white opacity-50">
+                            {{ student.rollnumber }}<br>
+                            {{ student.department }}<br>
+                        </p>
+                        </div>
+                    {% endfor %}
+                    {% if students|length == 0 %}
+                        <div class="flex flex-row items-center justify-center w-full h-96">
+                            <img src="{% static 'assets/no-results.png' %}" alt="">
+                            <h2 class="text-2xl font-bold text-center mt-3">No results found</h2>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock content %}
+
+{% block script %}
+<script>
+    const dropdownButton = document.getElementById('dropdown-button');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    let isDropdownOpen = true;
+    function toggleDropdown() {
+        isDropdownOpen = !isDropdownOpen;
+        if (isDropdownOpen) {
+            dropdownMenu.classList.remove('hidden');
+        } else {
+            dropdownMenu.classList.add('hidden');
+        }
+    }
+    toggleDropdown();
+    dropdownButton.addEventListener('click', toggleDropdown);
+    window.addEventListener('click', (event) => {
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+            isDropdownOpen = false;
+        }
+    });
+    const nameOption = document.getElementById('name-option');
+    const rollOption = document.getElementById('roll-option');
+    const branchOption = document.getElementById('branch-option');
+    const selectOption = document.getElementById('select-option');
+    nameOption.addEventListener('click', () => {
+        selectOption.innerHTML = 'Name';
+        toggleDropdown();
+    });
+    rollOption.addEventListener('click', () => {
+        selectOption.innerHTML = 'Roll No.';
+        toggleDropdown();
+    });
+    branchOption.addEventListener('click', () => {
+        selectOption.innerHTML = 'Branch';
+        toggleDropdown();
+    });
+
+    function search(){
+        if(document.getElementById('search').value.trim() == ''){
+            return;
+        }
+        switch(selectOption.innerHTML){
+            case 'Name':
+            window.location.href = "/club-members/search/name/" + document.getElementById('search').value;
+            break;
+            case 'Roll No.':
+            window.location.href = "/club-members/search/roll/" + document.getElementById('search').value;
+            break;
+            case 'Branch':
+            window.location.href = "/club-members/search/branch/" + document.getElementById('search').value;
+            break;
+        }
+    }
+    const students = document.querySelectorAll('#student');
+    students.forEach(student => {
+        student.addEventListener('click', () => {
+            window.location.href = "/club-members/inductees/" + student.dataset.studentId;
+        });
+    });
+
+    function filter(id){
+        switch(id){
+            case 1:
+                window.location.href = "/club-members/filter/1";
+                break;
+            case 2:
+                window.location.href = "/club-members/filter/2";
+                break;
+            case 3:
+                window.location.href = "/club-members/filter/3";
+                break;
+            default:
+                window.location.href = "/club-members";
+                break;
+        }
+    }
+</script>
+{% endblock script %}

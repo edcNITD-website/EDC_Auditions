@@ -3,21 +3,199 @@
 <html lang="en">
 	<head>
     <title>Django Tailwind</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
-	</head>
-
-	<body class="bg-gray-50 font-serif leading-normal tracking-normal">
-		<div class="container mx-auto">
-			<section class="flex items-center justify-center h-screen">
-				<h1 class="text-3xl">Django + Tailwind = ❤️</h1>
-			</section>
-		</div>
-		{% block content %}
-		{% endblock content %}
-		{% block script %}
-		{% endblock script %}
-	</body>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% load socialaccount %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://unpkg.com/split-type"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+    {% tailwind_css %}
+    {% block css %}
+    {% endblock css %}
+  </head>
+  <body class="overflow-x-hidden leading-normal tracking-normal text-white " >
+  <nav
+    class="flex-no-wrap relative flex w-full items-center justify-between py-2 bg-zinc-800  lg:flex-wrap lg:justify-start lg:py-4">
+    <div class="flex w-full flex-wrap items-center justify-between px-3">
+        <div>
+          <a
+            class="mx-2 my-1 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0"
+            href="#">
+            <img
+              class="mr-2 h-16"
+              src="{% static 'assets/edc-logo.png' %}"
+              alt="TE Logo"
+              loading="lazy" />
+          </a>
+        </div>
+      <!-- Hamburger button for mobile view -->
+      <button
+        class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden ml-auto mobile-menu-button"
+        type="button"
+        data-te-collapse-init
+        data-te-target="#mobileMenu"
+        aria-controls="mobileMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <!-- Hamburger icon -->
+        <span class="[&>svg]:w-7">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="h-7 w-7">
+            <path
+              fill-rule="evenodd"
+              d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+              clip-rule="evenodd" />
+          </svg>
+        </span>
+      </button>
+  
+     
+      <div
+        class="flex-grow hidden lg:flex items-center"
+        id="navbarSupportedContent1">
+        <ul
+          class="list-style-none ml-auto flex flex-col pl-0 lg:flex-row font-bold menu"
+          data-te-navbar-nav-ref>
+          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+            <a
+              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
+              href="#"
+              data-te-nav-link-ref
+              >HOME</a
+            >
+          </li>
+          <!-- Team link -->
+          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+            <a
+              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+              href="#"
+              data-te-nav-link-ref
+              >EDC</a
+            >
+          </li>
+          <!-- Projects link -->
+          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+            <a
+              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+              href="#"
+              data-te-nav-link-ref
+              >DOMAINS</a>
+          </li>
+          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+            <a
+              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+              href="#"
+              data-te-nav-link-ref
+              >CONTACT</a>
+          </li>
+          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
+            <a
+              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
+              href="#"
+              data-te-nav-link-ref
+              >RESULTS</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="sm:hidden mobile-menu hidden" id="mobileView">
+          <ul class="">
+            <li><a href="#home" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 bg-zinc-800 transition duration-300 font-mono font-extrabold text-white">HOME</a></li>
+            <li><a href="#services" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300 font-mono font-extrabold text-white">EDC</a></li>
+            <li><a href="#about" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300 font-mono font-extrabold text-white">DOMAINS</a></li>
+            <li><a href="#contact" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300 font-mono font-extrabold text-white">CONTACT</a></li>
+            <li><a href="#contact" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300  font-mono font-extrabold text-white">RESULTS</a></li>
+          </ul>
+    </div>
+    {% block content %}
+	  {% endblock content %}
+     <footer class="relative bg-zinc-800 pt-8 pb-6">
+       <div class="container mx-auto px-4">
+         <div class="flex flex-wrap text-left lg:text-left">
+           <div class="w-full lg:w-6/12 px-4">
+             <h4 class="text-3xl font-semibold text-white"><ul class="flex"><li><img src="{% static 'assets/edc-logo.png' %}" class="h-18"></li><li class="mt-10 font-bold font-sans">ENTREPRENEURSHIP DEVELOPMENT CELL <br><span class="text-2xl font-normal">NIT Durgapur</span></li> </h4></ul>
+             <div class="mt-6 lg:mb-0 mb-6">
+               <ul class="mt-8 flex justify-lrft space-x-5">
+                 <li class="relative">
+                   <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true"></span>
+                   <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://twitter.com/edcnitd/" target="_blank">
+                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSI+PGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik05LjMxNyA2Ljc3NSAxNS4xNDUgMGgtMS4zOEw4LjcwMyA1Ljg4MyA0LjY2MiAwSDBsNi4xMTIgOC44OTVMMCAxNmgxLjM4MWw1LjM0NC02LjIxMkwxMC45OTQgMTZoNC42NjFMOS4zMTcgNi43NzVaTTcuNDI1IDguOTc0bC0uNjE5LS44ODZMMS44OCAxLjA0SDRsMy45NzcgNS42ODguNjE5Ljg4NiA1LjE2OSA3LjM5NGgtMi4xMjJMNy40MjUgOC45NzRaIi8+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMCAwaDE2djE2SDB6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+" width="24" height="24" alt="" loading="lazy">
+                 <span class="sr-only">X</span></a></li>
+                 <li class="relative">
+                   <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true">
+                   </span>
+                   <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://www.instagram.com/edc.nitd/" target="_blank">
+                     <i class="fa-brands fa-instagram  text-3xl text-pink-700 focus:text-purple-700"></i>
+                   <span class="sr-only">Instagram</span></a></li>
+                   <li class="relative">
+                     <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true"></span>
+                     <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://www.facebook.com/edc.nitd/" target="_blank">
+                     <i class="fa-brands fa-facebook text-3xl text-blue-600"></i>
+                     <span class="sr-only">Facebook</span></a></li>
+                     <li class="relative">
+                       <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true"></span>
+                       <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://in.linkedin.com/company/edcnitd" target="_blank">
+                       <i class="fa-brands fa-linkedin text-3xl text-blue-800"></i>
+                       <span class="sr-only">Linkedin</span></a></li>
+                     <li class="relative">
+                       <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true"></span>
+                       <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://www.youtube.com/@entrepreneurshipdevelopmen7605" target="_blank">
+                       <i class="fa-brands fa-youtube text-3xl text-red-600"></i>
+                       <span class="sr-only">YouTube</span></a></li>
+             </div>
+           </div>
+           <div class="w-full lg:w-6/12 px-4">
+             <div class="flex flex-wrap items-top mb-6">
+               <div class="w-full lg:w-4/12 px-4 ml-auto">
+                 <span class="block uppercase text-white text-sm font-bold mb-2 mt-3">Useful Links</span>
+                 <ul class="list-unstyled">
+                   <li>
+                     <a class="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href=""><i class="fa-solid fa-house"></i> Home
+                     </a>
+                   </li>
+                   <li>
+                     <a class="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://edcnitd.co.in/"><i class="fa-solid fa-circle-user"></i> EDC</a>
+                   </li>
+                 </ul>
+               </div>
+               <div class="w-full lg:w-6/12 px-4">
+                 <span class="block uppercase text-white text-sm font-bold mb-2"></span>
+                 <h2 class="text-white font-bold text-sm">CONTACT US</h2>
+                 <p class="text-white text-sm font-semibold mb-2"><i class="fa fa-map-marker text-white mt-2"></i>
+                   : Mahatma Gandhi Avenue,
+                 <br>
+                   A-Zone, Durgapur, West Bengal
+                   <br>
+                   Durgapur: 713209 
+                   <br>
+                   <i class="fa fa-phone"></i>
+                   : 9123001251(Purvi)
+                   <br>
+                   <i class="fa fa-envelope"></i> : edc@nitdgp.ac.in
+               </p>
+               </div>
+             </div>
+           </div>
+         </div>
+         <hr class="my-6 border-blueGray-300">
+         <div class="flex flex-wrap items-center md:justify-between justify-center">
+           <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+             <div class="text-sm  text-white font-semibold py-1">
+               Made With <i class="fa-solid fa-heart text-red-600"></i> by <a href="https://edcnitd.co.in/web_team/" class="hover:text-green-800">WebD Team</a>
+             </div>
+           </div>
+         </div>
+       </div> 
+      </footer>  
+	<script src="{% static 'js/sample.js' %}"></script>
+	<script src="{% static 'js/website.js' %}"></script>
+	{% block script %}
+	{% endblock script %}
+  </body>
 </html>
