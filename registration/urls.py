@@ -12,4 +12,5 @@ urlpatterns = [
     path('club-members/filter/<int:type>',views.filter,name='filter'),
     path('club-members/inductees/<int:id>',views.student_profile,name='student_profile'),
     path('like/<int:id>',views.like,name='like_student'),
+    path('mark/<int:id>/<int:type>',views.mark,name="mark"),
 ]

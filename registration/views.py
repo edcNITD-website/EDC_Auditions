@@ -182,3 +182,19 @@ def filter(request,type):
             return redirect('home')
     else:
         return redirect('home')
+
+@login_required
+def mark(request,id,type):
+    user = request.user
+    if user.is_authenticated:
+        is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
+        if is_club_member:
+            if request.method=='POST':
+                student = get_object_or_404(Inductees, id = id)
+                student.color = type
+                student.save()
+            return HttpResponseRedirect(reverse('student_profile', args=[str(id)]))
+        else:
+            return redirect('home')
+    else:
+        return redirect('home')
