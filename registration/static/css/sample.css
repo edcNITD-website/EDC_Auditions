@@ -148,4 +148,7 @@ p{
     100%{
         transform: rotate(360deg);
     }
+
+.toast{
+    background-color: #18191b;
 }

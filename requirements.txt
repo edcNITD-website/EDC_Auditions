@@ -1,6 +1,6 @@
 Django==3.2.16
 django-allauth==0.58.0
-pillow==10.1.0
+pillow==9.5.0
 django-crispy-forms==1.14
 fontawesomefree==6.5.0
 django-tailwind==3.2.0
