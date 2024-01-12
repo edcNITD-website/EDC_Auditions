@@ -25,7 +25,7 @@ module.exports = {
          * Adjust the following line to match your project structure.
          */
         '../../**/templates/**/*.html',
-        "./node_modules/flowbite/**/*.js"
+        "./node_modules/flowbite/**/*.js",
 
         "./node_modules/flowbite/**/*.js",
 

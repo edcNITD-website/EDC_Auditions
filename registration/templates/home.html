@@ -1,9 +1,28 @@
 {% extends 'base.html' %}
 {% load static tailwind_tags %}
+{% load socialaccount %}
 {% block css %}
 <link href="{% static 'css/sample.css' %}" rel="stylesheet">
+<style>
+  #preloader{
+  background: #18191b no-repeat center center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  z-index: 100;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+}
+</style>
 {% endblock css %}
+
 {% block content %}
+<div id="preloader">
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+    <dotlottie-player src="https://lottie.host/9f6fd70b-d135-43bb-b4e3-5b5d74dadbdf/K1RCDqyq6C.json" background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay></dotlottie-player>
+</div>
 <main>
   <header class="group  w-[100vw] relative h-[100vh] bg-neutral-950 overflow-hidden">
     <img src="{% static 'assets/bg1.jpg' %}" alt=""
@@ -20,16 +39,19 @@
         <img src="{% static 'assets/NWWW1.png' %}" alt="" class="relative size-full club z-40">
       </div>
     </div>
+    
     <div
       class="w-[80%] md:w-[50%] relative top-[35%] left-8 md:left-12 lg:left-24 text-gradient-to-r from-green700 via-teal-400 to-blue-500 z-40">
       <h1 id="text" class="text-4xl sm:text-6xl font-[800] inline-block overflow-hidden content mr-3"> Welcome to </h1>
       <span
         class="bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text text-5xl sm:text-7xl font-[800] leading-none">Auditions</span>
       <div class="items-center mt-10 ">
-        <button style="display:flex"
+        <a href="{% provider_login_url 'google' %}?next=/">
+          <button style="display:flex"
           class="relative overflow-hidden inherit text-center items-center rounded-full whitespace-nowrap bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-lg pl-3 pr-4 py-2 font-bold text-black outline-none duration-200 before:bg-white before:w-full before:h-full before:absolute before:top-0 before:right-0 before:-translate-x-[65%] before:duration-300 before:rounded-full hover:before:translate-x-0  md:scale-125">
           <img src="{% static 'assets\google.svg' %}" style="float:left; margin-right:0.5em"
-            class="h-6 w-6 z-50 relative md:scale-125 "> <a href="#" class="z-0 relative ml-2"> Register </a> </button>
+            class="h-6 w-6 z-50 relative md:scale-125 "> <a href="{% provider_login_url 'google' %}?next=/" class="z-0 relative ml-2"> Register </a> </button>
+        </a>
       </div>
     </div>
 
@@ -132,5 +154,13 @@
       }
     });
   }
+
+let loader = document.getElementById("preloader");
+
+window.addEventListener("load", () => {
+  setTimeout(() => {loader.style.display = "none";}, 1000);
+});
+
+
 </script>
 {% endblock script %}
