@@ -1,204 +1,155 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-    <title>Django Tailwind</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    {% load socialaccount %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://unpkg.com/split-type"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
-    {% tailwind_css %}
-    {% block css %}
-    {% endblock css %}
-  </head>
-  <body class="overflow-x-hidden leading-normal tracking-normal text-white " >
-  <nav
-    class="flex-no-wrap relative flex w-full items-center justify-between py-2 bg-zinc-800  lg:flex-wrap lg:justify-start lg:py-4">
-    <div class="flex w-full flex-wrap items-center justify-between px-3">
-        <div>
-          <a
-            class="mx-2 my-1 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0"
-            href="#">
-            <img
-              class="mr-2 h-16"
-              src="{% static 'assets/edc-logo.png' %}"
-              alt="TE Logo"
-              loading="lazy" />
-          </a>
-        </div>
-      <!-- Hamburger button for mobile view -->
-      <button
-        class="block border-0 bg-transparent px-2 text-neutral-500 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden ml-auto mobile-menu-button"
-        type="button"
-        data-te-collapse-init
-        data-te-target="#mobileMenu"
-        aria-controls="mobileMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <!-- Hamburger icon -->
-        <span class="[&>svg]:w-7">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="h-7 w-7">
-            <path
-              fill-rule="evenodd"
-              d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-              clip-rule="evenodd" />
+<head>
+  <title>Django Tailwind</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% load socialaccount %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://unpkg.com/split-type"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+  {% tailwind_css %}
+  {% block css %}
+  {% endblock css %}
+</head>
+
+<body class="overflow-x-hidden leading-normal tracking-normal text-white font-Roboto bg-neutral-900">
+
+  <nav class="bg-gray-900/50 backdrop-blur-md fixed w-full top-0 start-0 border-gray-200 dark:border-gray-600 z-50">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 transition-all pl-10">
+      <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="{% static 'assets/edc-logo.png' %}" class="h-8 scale-[2] -hue-rotate-180 md:ml-2" alt="Flowbite Logo">
+      </a>
+      <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <button type="button" class="hidden md:block text-neutral-50 border-2 border-teal-400 rounded py-1 px-3">
+          Login
+        </button>
+        <button data-collapse-toggle="navbar-sticky" type="button"
+          class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-200/5 focus:outline-none focus:ring-2 focus:ring-gray-400 "
+          aria-controls="navbar-sticky" aria-expanded="false"
+          onclick="document.querySelector('#list').classList.toggle('list')">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M1 1h15M1 7h15M1 13h15" />
           </svg>
-        </span>
-      </button>
-  
-     
-      <div
-        class="flex-grow hidden lg:flex items-center"
-        id="navbarSupportedContent1">
+        </button>
+      </div>
+      <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="list">
         <ul
-          class="list-style-none ml-auto flex flex-col pl-0 lg:flex-row font-bold menu"
-          data-te-navbar-nav-ref>
-          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-            <a
-              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-zinc-400"
-              href="#"
-              data-te-nav-link-ref
-              >HOME</a
-            >
+          class="flex flex-col p-4 md:p-0 mt-4 font-medium borderrounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
+          <li>
+            <a href="/"
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0"
+              aria-current="page">Home</a>
           </li>
-          <!-- Team link -->
-          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-            <a
-              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-              href="#"
-              data-te-nav-link-ref
-              >EDC</a
-            >
+          <li>
+            <a href="https://edcnitd.co.in/"
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">EDC</a>
           </li>
-          <!-- Projects link -->
-          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-            <a
-              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-              href="#"
-              data-te-nav-link-ref
-              >DOMAINS</a>
+          <li>
+            <a href="#"
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Questions</a>
           </li>
-          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-            <a
-              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-              href="#"
-              data-te-nav-link-ref
-              >CONTACT</a>
+          <li>
+            <a href="#"
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Results</a>
           </li>
-          <li class="mb-4 lg:mb-0 lg:pr-2" data-te-nav-item-ref>
-            <a
-              class="text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 lg:px-2 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
-              href="#"
-              data-te-nav-link-ref
-              >RESULTS</a>
+          <li>
+            <a href="#"
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 md:hidden">Login</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  <div style="background-color: #18191b;">
+    <div style="background-color: #18191b;">
     {% include 'toast.html' with message=message %}
-  </div>
-    <div class="sm:hidden mobile-menu hidden" id="mobileView">
-          <ul class="">
-            <li><a href="#home" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 bg-zinc-800 transition duration-300 font-mono font-extrabold text-white">HOME</a></li>
-            <li><a href="#services" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300 font-mono font-extrabold text-white">EDC</a></li>
-            <li><a href="#about" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300 font-mono font-extrabold text-white">DOMAINS</a></li>
-            <li><a href="#contact" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300 font-mono font-extrabold text-white">CONTACT</a></li>
-            <li><a href="#contact" class="block text-lg px-2 py-4 hover:bg-gradient-to-r from-green-700 via-teal-400 to-blue-500  bg-zinc-800 transition duration-300  font-mono font-extrabold text-white">RESULTS</a></li>
-          </ul>
     </div>
-    {% block content %}
-	  {% endblock content %}
-     <footer class="relative bg-zinc-800 pt-8 pb-6">
-       <div class="container mx-auto px-4">
-         <div class="flex flex-wrap text-left lg:text-left">
-           <div class="w-full lg:w-6/12 px-4">
-             <h4 class="text-3xl font-semibold text-white"><ul class="flex"><li><img src="{% static 'assets/edc-logo.png' %}" class="h-18"></li><li class="mt-10 font-bold font-sans">ENTREPRENEURSHIP DEVELOPMENT CELL <br><span class="text-2xl font-normal">NIT Durgapur</span></li> </h4></ul>
-             <div class="mt-6 lg:mb-0 mb-6">
-               <ul class="mt-8 flex justify-lrft space-x-5">
-                 <li class="relative">
-                   <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true"></span>
-                   <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://twitter.com/edcnitd/" target="_blank">
-                 <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0ibm9uZSI+PGcgY2xpcC1wYXRoPSJ1cmwoI2EpIj48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik05LjMxNyA2Ljc3NSAxNS4xNDUgMGgtMS4zOEw4LjcwMyA1Ljg4MyA0LjY2MiAwSDBsNi4xMTIgOC44OTVMMCAxNmgxLjM4MWw1LjM0NC02LjIxMkwxMC45OTQgMTZoNC42NjFMOS4zMTcgNi43NzVaTTcuNDI1IDguOTc0bC0uNjE5LS44ODZMMS44OCAxLjA0SDRsMy45NzcgNS42ODguNjE5Ljg4NiA1LjE2OSA3LjM5NGgtMi4xMjJMNy40MjUgOC45NzRaIi8+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMCAwaDE2djE2SDB6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+" width="24" height="24" alt="" loading="lazy">
-                 <span class="sr-only">X</span></a></li>
-                 <li class="relative">
-                   <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true">
-                   </span>
-                   <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://www.instagram.com/edc.nitd/" target="_blank">
-                     <i class="fa-brands fa-instagram  text-3xl text-pink-700 focus:text-purple-700"></i>
-                   <span class="sr-only">Instagram</span></a></li>
-                   <li class="relative">
-                     <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true"></span>
-                     <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://www.facebook.com/edc.nitd/" target="_blank">
-                     <i class="fa-brands fa-facebook text-3xl text-blue-600"></i>
-                     <span class="sr-only">Facebook</span></a></li>
-                     <li class="relative">
-                       <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true"></span>
-                       <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://in.linkedin.com/company/edcnitd" target="_blank">
-                       <i class="fa-brands fa-linkedin text-3xl text-blue-800"></i>
-                       <span class="sr-only">Linkedin</span></a></li>
-                     <li class="relative">
-                       <span class="absolute -bottom-1 -left-1 h-full w-full rounded-full bg-secondary-5" aria-hidden="true"></span>
-                       <a class="relative flex h-12 w-12 items-center justify-center rounded-full border-[3px] border-black bg-white transition-transform duration-200 hover:-translate-x-1 hover:translate-y-1" href="https://www.youtube.com/@entrepreneurshipdevelopmen7605" target="_blank">
-                       <i class="fa-brands fa-youtube text-3xl text-red-600"></i>
-                       <span class="sr-only">YouTube</span></a></li>
-             </div>
-           </div>
-           <div class="w-full lg:w-6/12 px-4">
-             <div class="flex flex-wrap items-top mb-6">
-               <div class="w-full lg:w-4/12 px-4 ml-auto">
-                 <span class="block uppercase text-white text-sm font-bold mb-2 mt-3">Useful Links</span>
-                 <ul class="list-unstyled">
-                   <li>
-                     <a class="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href=""><i class="fa-solid fa-house"></i> Home
-                     </a>
-                   </li>
-                   <li>
-                     <a class="text-white hover:text-blueGray-800 font-semibold block pb-2 text-sm" href="https://edcnitd.co.in/"><i class="fa-solid fa-circle-user"></i> EDC</a>
-                   </li>
-                 </ul>
-               </div>
-               <div class="w-full lg:w-6/12 px-4">
-                 <span class="block uppercase text-white text-sm font-bold mb-2"></span>
-                 <h2 class="text-white font-bold text-sm">CONTACT US</h2>
-                 <p class="text-white text-sm font-semibold mb-2"><i class="fa fa-map-marker text-white mt-2"></i>
-                   : Mahatma Gandhi Avenue,
-                 <br>
-                   A-Zone, Durgapur, West Bengal
-                   <br>
-                   Durgapur: 713209 
-                   <br>
-                   <i class="fa fa-phone"></i>
-                   : 9123001251(Purvi)
-                   <br>
-                   <i class="fa fa-envelope"></i> : edc@nitdgp.ac.in
-               </p>
-               </div>
-             </div>
-           </div>
-         </div>
-         <hr class="my-6 border-blueGray-300">
-         <div class="flex flex-wrap items-center md:justify-between justify-center">
-           <div class="w-full md:w-4/12 px-4 mx-auto text-center">
-             <div class="text-sm  text-white font-semibold py-1">
-               Made With <i class="fa-solid fa-heart text-red-600"></i> by <a href="https://edcnitd.co.in/web_team/" class="hover:text-green-800">WebD Team</a>
-             </div>
-           </div>
-         </div>
-       </div> 
-      </footer>  
-	<script src="{% static 'js/sample.js' %}"></script>
-	<script src="{% static 'js/website.js' %}"></script>
-	{% block script %}
-	{% endblock script %}
-  </body>
+
+  {% block content %}
+  {% endblock content %}
+  <footer id="footer">
+    <div class="footer-top bg-zinc-800 font-light text-neutral-300">
+      <div class="container-fluid p-4">
+        <div class="row block md:flex  justify-around">
+          <div class="flex items-center gap-5">
+            <div class="logo w-52 ">
+              <img src="{% static 'assets/edc-logo.png' %}" alt="">
+            </div>
+            <div class="clg font-medium">
+              Team EDC <br> NIT Durgapur
+            </div>
+          </div>
+          <div class="col-md-3 footer-contact w-max text-center">
+            <h4 class="text-3xl font-normal border-b-2 border-slate-400">Contact Us</h4>
+
+            <ul class="block lg:flex socials justify-between">
+              <li class="px-6 py-4 w-max">
+                <i class="fa fa-phone "></i> : +91 85298 12646 : <span class="inline-block">(Ritesh Raj Sharma)</span>
+              </li>
+              <li class="px-6 py-4 w-max">
+                <i class="fa fa-phone "></i> : +91 85298 12646 : <span class="inline-block">(Ritesh Raj Sharma)</span>
+              </li>
+            </ul>
+
+          </div>
+
+        </div>
+        <li class="social-links my-4 flex gap-1 mx-auto items-center justify-center">
+          <a target="_blank" href="https://twitter.com/edcnitd" class="twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 32 32"
+              fill="#D4D4D4">
+              <path
+                d="M21.634,4.031c-0.815,0.385-2.202,1.107-2.899,1.245c-0.027,0.007-0.049,0.016-0.075,0.023 c-0.813-0.802-1.927-1.299-3.16-1.299c-2.485,0-4.5,2.015-4.5,4.5c0,0.131-0.011,0.372,0,0.5c-3.218,0-5.568-1.679-7.327-3.837 C3.438,4.873,3.188,5.024,3.136,5.23C3.019,5.696,2.979,6.475,2.979,7.031c0,1.401,1.095,2.777,2.8,3.63 c-0.314,0.081-0.66,0.139-1.02,0.139c-0.424,0-0.912-0.111-1.339-0.335c-0.158-0.083-0.499-0.06-0.398,0.344 c0.405,1.619,2.253,2.756,3.904,3.087c-0.375,0.221-1.175,0.176-1.543,0.176c-0.136,0-0.609-0.032-0.915-0.07 c-0.279-0.034-0.708,0.038-0.349,0.582c0.771,1.167,2.515,1.9,4.016,1.928c-1.382,1.084-3.642,1.48-5.807,1.48 c-0.438-0.01-0.416,0.489-0.063,0.674C3.862,19.504,6.478,20,8.347,20C15.777,20,20,14.337,20,8.999 c0-0.086-0.002-0.266-0.005-0.447C19.995,8.534,20,8.517,20,8.499c0-0.027-0.008-0.053-0.008-0.08 c-0.003-0.136-0.006-0.263-0.009-0.329c0.589-0.425,1.491-1.163,1.947-1.728c0.155-0.192,0.03-0.425-0.181-0.352 c-0.543,0.189-1.482,0.555-2.07,0.625c1.177-0.779,1.759-1.457,2.259-2.21C22.109,4.168,21.895,3.907,21.634,4.031z">
+              </path>
+            </svg>
+          </a>
+          <a target="_blank" href="https://www.facebook.com/edc.nitd" class="facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 32 32" fill="#D4D4D4">
+              <path d="M17,3H7C4.791,3,3,4.791,3,7v10c0,2.209,1.791,4,4,4h5.621v-6.961h-2.343v-2.725h2.343V9.309 c0-2.324,1.421-3.591,3.495-3.591c0.699-0.002,1.397,0.034,2.092,0.105v2.43h-1.428c-1.13,0-1.35,0.534-1.35,1.322v1.735h2.7 l-0.351,2.725h-2.365V21H17c2.209,0,4-1.791,4-4V7C21,4.791,19.209,3,17,3z"></path>
+          </svg>
+          </a>
+          <a target="_blank" href="https://www.instagram.com/edc.nitd" class="instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 32 32"
+              fill="#D4D4D4">
+              <path
+                d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z">
+              </path>
+            </svg>
+          </a>
+          <a target="_blank" href="https://www.youtube.com/channel/UCaBiTXfp5gknGPS6N3asDBg" class="google-plus">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 32 32"
+              fill="#D4D4D4">
+              <path
+                d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,14.598V9.402c0-0.385,0.417-0.625,0.75-0.433l4.5,2.598c0.333,0.192,0.333,0.674,0,0.866l-4.5,2.598 C10.417,15.224,10,14.983,10,14.598z">
+              </path>
+            </svg>
+          </a>
+          <a target="_blank" href="https://www.linkedin.com/company/edcnitd/" class="linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 32 32"
+              fill="#D4D4D4">
+              <path
+                d="M19,3H5C3.895,3,3,3.895,3,5v14c0,1.105,0.895,2,2,2h14c1.105,0,2-0.895,2-2V5C21,3.895,20.105,3,19,3z M7.738,17L7.738,17 c-0.697,0-1.262-0.565-1.262-1.262v-4.477C6.477,10.565,7.042,10,7.738,10h0C8.435,10,9,10.565,9,11.262v4.477 C9,16.435,8.435,17,7.738,17z M7.694,8.717c-0.771,0-1.286-0.514-1.286-1.2s0.514-1.2,1.371-1.2c0.771,0,1.286,0.514,1.286,1.2 S8.551,8.717,7.694,8.717z M16.779,17L16.779,17c-0.674,0-1.221-0.547-1.221-1.221v-2.605c0-1.058-0.651-1.174-0.895-1.174 s-1.058,0.035-1.058,1.174v2.605c0,0.674-0.547,1.221-1.221,1.221h-0.081c-0.674,0-1.221-0.547-1.221-1.221v-4.517 c0-0.697,0.565-1.262,1.262-1.262h0c0.697,0,1.262,0.565,1.262,1.262c0,0,0.282-1.262,2.198-1.262C17.023,10,18,10.977,18,13.174 v2.605C18,16.453,17.453,17,16.779,17z">
+              </path>
+            </svg>
+          </a>
+        </li>
+        <div class="col-lg-3 footer-info font-normal border-t border-slate-400 mt-4 pt-2">
+          <p style="text-align:center;" class="font-light">Made with <i class="fa fa-heart" aria-hidden="true"></i> by
+            <a href="https://edcnitd.co.in/web_team"> Web-Team </a>
+          </p>
+          <p style="text-align:center; " class="font-extralight">© <span id="Auto_Year">2024</span> EDC. All Rights
+            Reserved.</p>
+        </div>
+      </div>
+  </footer>
+  <script src="{% static 'js/sample.js' %}"></script>
+  <script src="{% static 'js/website.js' %}"></script>
+  {% block script %}
+  {% endblock script %}
+</body>
+
 </html>

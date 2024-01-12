@@ -25,6 +25,7 @@ module.exports = {
          * Adjust the following line to match your project structure.
          */
         '../../**/templates/**/*.html',
+        "./node_modules/flowbite/**/*.js"
 
         "./node_modules/flowbite/**/*.js",
 
@@ -48,6 +49,7 @@ module.exports = {
             fontFamily:{
                 Poppins: "Poppins",
                 Montserrat: "Montserrat",
+                Roboto: "Roboto"
             }
         },
     },
@@ -61,6 +63,6 @@ module.exports = {
         require('@tailwindcss/typography'),
         require('@tailwindcss/line-clamp'),
         require('@tailwindcss/aspect-ratio'),
-        require('flowbite/plugin'),
+        require('flowbite/plugin')
     ],
 }
