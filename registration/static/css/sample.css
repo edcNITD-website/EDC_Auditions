@@ -1,6 +1,49 @@
-.group{
-    --tw-text-opacity: 1;
-   background-color: rgb(26 26 26/var(--tw-text-opacity));
+.list{
+    display: flex;
+    flex-direction: column;
+    justify-self: end;
+}
+header::before{
+    clip-path: polygon(0 0, 40% 0, 60% 100%, 0% 100%);
+}
+.spin{
+    animation: spin 60s linear infinite;
+}
+button::before{
+    box-shadow: #1f242d 0px 0px 20px 2px;
+}
+header .img.bg{
+    filter: saturate(800%) hue-rotate(165deg);
+}
+/* body{
+    pointer-events: none;
+}
+html{
+    pointer-events: none;
+} */
+.desc{
+    border-left: 4px solid seagreen;
+}
+.shadow{
+    border-radius: 50%;
+    box-shadow: 100px 0px 300px 100px blue , -100px 0px 300px 100px green, 0px 100px 300px 100px seagreen,0px -100px 300px 100px seagreen;
+}
+.heading{
+    border-bottom: 4px solid rgb(0, 128, 111);
+}
+header .content{
+    text-shadow: 0 0 5px black;
+}
+.card h3, .card p, .card .animation{
+    transition: 1s;
+    transition-timing-function: cubic-bezier(.25,1.5,.25,1);
+}
+.card:hover h3, .card:hover p{
+    translate: 0 -200px ;
+}
+.card:hover .animation{
+    opacity: .25;
+    scale: .8;
 }
 .slide{
     perspective: 100px;
@@ -21,11 +64,11 @@
     }
 } 
 
-.card {
+/* .card {
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 0 30px 5px orange;
-  }
+  } */
 
   h1{
     position: relative;
@@ -38,11 +81,11 @@ p{
     text-align: center;
   }
   
-  .card {
+  /* .card {
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 0 30px 5px orange;
-  }
+  } */
 
 .section .animate{
     opacity: 0;
@@ -96,4 +139,13 @@ p{
 
 .asteriskField{
     color: red;
+}
+
+@keyframes spin {
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }
