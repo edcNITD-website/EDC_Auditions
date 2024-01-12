@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% load tailwind_tags %}
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -16,18 +19,14 @@
     .bg-white {
       background-color: #1f2937; /* Darker background for white containers */
     }
-
-    /* Hover effect with the color #115483 */
     .entry:hover {
       background-color: #115483;
     }
 
-    /* Shadow effect for each row with the color #1affb2 */
     .entry {
       box-shadow: 0 4px 8px rgba(176, 221, 235, 0.1); /* Shadow color: #1affb2 with reduced opacity */
     }
 
-    /* Gradient text color for the title */
     .gradient-text {
       background: linear-gradient(to right, #34d399, #6ee7b7, #60a5fa);
       -webkit-background-clip: text;
@@ -42,19 +41,92 @@
   </div>
 
   <div id="leaderboard" class="max-w-xl overflow-y-auto mx-auto mt-4 p-4 bg-white rounded shadow animate__animated animate__fadeIn animate__delay-2s">
-    <!-- Labels for Student and Round -->
     <div id="labels" class="flex flex-row justify-between mb-4">
       <div>Student</div>
       <div>Roll</div>
     </div>
-
-    <!-- No results found message -->
     <div id="noResultsMessage" class="px-4 py-2 text-center">
       No results found
     </div>
-    <!-- Entries will be dynamically added here -->
   </div>
 
   <script src="../static/js/results.js"></script>
 </body>
-</html>
+</html> -->
+
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .shine:hover{
+        transition: all 0.3s ease;
+        background: linear-gradient(90deg, #2b2e33, #1e1e1e, white);
+        background-size: 200% 200%;
+    }
+    .circle-red{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #d22b2b;
+        margin: 4px;
+    }
+    .circle-yellow{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #fbff16;
+        margin: 4px;
+    }
+    .circle-green{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #7fff16;
+        margin: 4px;
+    }
+</style>
+{% endblock css %}
+
+{% block content %}
+<main class="overflow-hidden flex flex-1 flex-col bg-[#18191b] text-white">
+    <div class="relative overflow-none">
+        <section class="bg-[#18191b] lg:pt-12 md:pt-6 items-center justify-center">
+          {% if round != 0 %}
+            <div class="max-w-8xl px-5 mx-auto mt-32 text-center ">
+                <h2 class="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-teal-400 to-blue-500 text-transparent bg-clip-text hover:bg-gradient-to-l ">
+                    Results For Round {{ round }}
+                </h2>
+            </div>
+                <div id="students" class="flex flex-wrap justify-center mt-48 md:flex md:flex-wrap mb-36 group ">
+                    {% for result in winners %}
+                        <div id="student" data-student-id="{{ result.inductee.id }}"
+                        class=" w-full flex flex-col items-center p-6 md:mr-5 space-y-6 mb-20 rounded-xl bg-white/10 md:w-1/4 cursor-pointer group-hover:blur-sm hover:!blur-none group-hover:scale-[0.85] hover:!scale-100 duration-500 ">
+                        <div class="flex flex-row -mt-14 items-center gap-4 ">
+                            <img src="{{ result.inductee.profile_picture }}" class="w-16 mr-10 rounded-full" alt="">
+                        </div>
+                        <div class="flex flex-row justify-between items-center">
+                            <h5 class="text-lg font-bold text-white ">{{ result.inductee.full_name }}</h5>
+                            <img src="{% static 'assets/award.gif' %}" class="w-6 h-6 mx-4 rounded-full" alt="">
+                        </div>
+                            <p class="text-sm text-white opacity-50 mr-4 ">
+                                {{ result.inductee.rollnumber }}<br>
+                                {{ result.domain }}<br>
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+          {% else %}
+          <div class="max-w-8xl px-5 mx-auto mt-32 text-center ">
+            <h2 class="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-teal-400 to-blue-500 text-transparent bg-clip-text hover:bg-gradient-to-l ">
+                Results are On the way
+            </h2>
+            
+        </div>
+          {% endif %}
+        </section>
+    </div>
+</main>
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

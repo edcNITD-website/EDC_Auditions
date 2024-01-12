@@ -9,11 +9,26 @@
     font-size: 1.4rem;
     font-weight: 800;
     }
+    #id_gender,#id_year{
+        width: 25vw;
+    }
+    .custom-control-input{
+        border-radius: 50%;
+    }
+    .form-gradient{
+    /* background: url(https://media4.giphy.com/media/BHNfhgU63qrks/giphy.gif) center center no-repeat; */
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.13);
+    backdrop-filter: blur(10px);
+    padding: 50px 35px;
+    }
     input{
         width: 70vw;
     }
-    #id_gender,#id_year{
-        width: 25vw;
+    .choice{
+        width: 70vw;
+        margin-block: 10px;
+        padding: 10px;
     }
     </style>
     {% endblock css %}
@@ -23,7 +38,7 @@
             <h2 class="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text hover:bg-gradient-to-l ">
                 Student Registration
             </h2>
-            <div class="w-full relative block p-6 overflow-hidden bg-white/10 border-slate-100 rounded-lg md:ml-6 mb-10 ">
+            <div class="form-gradient relative block p-6 overflow-hidden border-slate-100 rounded-lg md:ml-6 mb-10 ">
                 <span class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 to-blue-500 hover:bg-gradient-to-l"></span>
                 {% crispy form %}
             </div>

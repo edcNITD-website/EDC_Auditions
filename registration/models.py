@@ -4,7 +4,7 @@ import json
 
 class Inductees(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    rollnumber = models.CharField(max_length=9, blank=False, default='000000000')
+    rollnumber = models.CharField(max_length=9, blank=False, default='0')
     department = models.CharField(max_length=50, blank=False, default='National Institute of Technology, Durgapur')
     is_club_member = models.BooleanField(default=False)
     profile_picture = models.URLField(blank=True)
@@ -12,11 +12,12 @@ class Inductees(models.Model):
     full_name = models.CharField(max_length=255, blank=True)
     phone_number = models.CharField(max_length=10, blank=True)
     year = models.IntegerField(default=1)
-    registration_no = models.CharField(max_length=15,blank=True)
+    registration_no = models.CharField(max_length=15,blank=True,default='0')
     place = models.CharField(max_length=50,blank=True)
     round = models.IntegerField(default=1)
     like = models.ManyToManyField(User, related_name='vote')
     color=models.IntegerField(choices=[(1,'red'),(2,'yellow'),(3,'green'),(4,'transparent')],default=4)
+    domains = models.CharField(max_length = 120,blank=True)
 
     def total_likes(self):
         return self.like.count()
@@ -62,3 +63,10 @@ class Response(models.Model):
         unique_together = ('student', 'question')
     def __str__(self):
         return f"{self.student} : {self.question.id} : {self.answer}"
+    
+class Result(models.Model):
+    inductee = models.OneToOneField(Inductees, on_delete=models.CASCADE ,blank=True,null=True)
+    round = models.IntegerField(default=1)
+    domain = models.CharField(max_length=25,choices=(('WEBD','WEB DEVELOPEMENT'),('VIDEO','VIDEO EDITING'),('CONTENT','CONTENT WRITING'),('EVENT','EVENT MANAGEMENT')),blank=True)
+    def __str__(self):
+        return self.inductee.full_name + " | " + self.domain
