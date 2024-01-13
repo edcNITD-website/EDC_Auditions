@@ -162,9 +162,13 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 2
+
 SOCIALACCOUNT_LOGIN_ON_GET=True
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True
+SOCIALACCOUNT_STORE_TOKENS = True
+
+LOGIN_REDIRECT_URL = '/details'
+# LOGOUT_REDIRECT_URL = '/'
 
 TAILWIND_APP_NAME = 'registration'
 
@@ -172,4 +176,4 @@ INTERNAL_IPS=[
     "127.0.0.1",
 ]
 
-SOCIALACCOUNT_ADAPTER = 'registration.adapters.CustomSocialAccountAdapter'
+# SOCIALACCOUNT_ADAPTER = 'registration.adapters.CustomSocialAccountAdapter'

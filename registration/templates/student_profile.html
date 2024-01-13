@@ -6,6 +6,17 @@
 {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+      #preloader{
+  background: #18191b no-repeat center center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  z-index: 100;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+}
     .invalid-feedback{
         display: none;
     }
@@ -40,6 +51,10 @@
 
 
 {% block content %}
+<div id="preloader">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+      <dotlottie-player src="https://lottie.host/9f6fd70b-d135-43bb-b4e3-5b5d74dadbdf/K1RCDqyq6C.json" background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay></dotlottie-player>
+</div>
 <main class="overflow-hidden flex flex-1 flex-col bg-[#18191b] text-white p-5">
     <div class="max-w-lg mx-auto my-10 bg-white/10 rounded-lg shadow-md p-5">
         <img class="w-32 h-32 rounded-full mx-auto" src="{{ student.profile_picture }}" alt="Profile picture">
@@ -285,5 +300,10 @@
         .catch(error => {
         });
     }
+    let loader = document.getElementById("preloader");
+
+window.addEventListener("load", () => {
+  setTimeout(() => {loader.style.display = "none";}, 1000);
+});
 </script>
 {% endblock script %}

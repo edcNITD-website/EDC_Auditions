@@ -10,22 +10,33 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <script src="https://unpkg.com/split-type"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.3/gsap.min.js"></script>
+  <link href="{% static 'css/sample.css' %}" rel="stylesheet">
   {% tailwind_css %}
   {% block css %}
   {% endblock css %}
 </head>
 
 <body class="overflow-x-hidden leading-normal tracking-normal text-white font-Roboto bg-neutral-900">
-
-  <nav class="bg-gray-900/50 backdrop-blur-md fixed w-full top-0 start-0 border-gray-200 dark:border-gray-600 z-50">
+  <nav style="background-color: rgba(56, 65, 85, 0.5);" class=" backdrop-blur-md fixed w-full top-0 start-0 border-gray-200 dark:border-gray-600 z-50">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 transition-all pl-10">
       <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="{% static 'assets/edc-logo.png' %}" class="h-8 scale-[2] -hue-rotate-180 md:ml-2" alt="Flowbite Logo">
+        <img src="{% static 'assets/edc-logo.png' %}" class=" h-8 scale-[2] -hue-rotate-180 md:ml-2" alt="EDC Logo">
       </a>
       <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <button type="button" class="hidden md:block text-neutral-50 border-2 border-teal-400 rounded py-1 px-3">
-          Login
-        </button>
+        {% if user.is_authenticated %}
+        <form method="post" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          <button  type="submit" class="hidden md:block text-neutral-50 border-2 border-teal-400 rounded py-1 px-3 font-bold">
+            Logout
+          </button>
+        </form>
+            {% else %}
+        <a href="{% provider_login_url 'google' %}?next=/">
+          <button type="button" class="hidden md:block text-neutral-50 border-2 border-teal-400 rounded py-1 px-3 font-bold">
+            Login
+          </button>
+        </a>
+        {% endif %}
         <button data-collapse-toggle="navbar-sticky" type="button"
           class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-200/5 focus:outline-none focus:ring-2 focus:ring-gray-400 "
           aria-controls="navbar-sticky" aria-expanded="false"
@@ -42,36 +53,53 @@
           class="flex flex-col p-4 md:p-0 mt-4 font-medium borderrounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
           <li>
             <a href="/" 
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0"
+              class="block py-2 px-3 text-neutral-400 font-bold rounded md:hover:bg-transparent hover:text-teal-400 md:p-0"
               aria-current="page">Home</a>
           </li>
           <li>
             <a href="https://edcnitd.co.in/" target="_blank"
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">EDC</a>
+              class="block py-2 px-3 text-neutral-400 font-bold rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">EDC</a>
           </li>
           <li>
             <a href="/questions"
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Questions</a>
+              class="block py-2 px-3 text-neutral-400 font-bold rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Questions</a>
           </li>
           <li>
             <a href="/results"
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Results</a>
+              class="block py-2 px-3 text-neutral-400 font-bold rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Results</a>
           </li>
           <li>
-            <a href="{% provider_login_url 'google' %}?next=/"
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 md:hidden">Login</a>
+            <a href="/details"
+              class="block py-2 px-3 text-neutral-400 font-bold rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Profile</a>
           </li>
+          <li>
+            <a href="/club-members"
+              class="block py-2 px-3 text-neutral-400 font-bold rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Admin</a>
+          </li>
+          {% if user.is_authenticated %}
+          <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <button  type="submit" class="block py-2 px-3 text-neutral-400 font-bold rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 md:hidden">
+              Logout
+            </button>
+          </form>
+          {% else %}
+          <li>
+            <a href="{% provider_login_url 'google' %}?next=/"
+              class="block py-2 px-3 text-neutral-400 font-bold rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 md:hidden">Login</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
   </nav>
-    <div style="background-color: #18191b;">
+  <div style="position: absolute; z-index: 1000; right: 0; padding-top: 9vh;">
     {% include 'toast.html' with message=message %}
-    </div>
+  </div>
 
   {% block content %}
   {% endblock content %}
-  <footer id="footer">
+  <footer id="footer" class="relative bottom-0">
     <div class="footer-top bg-zinc-800 font-light text-neutral-300">
       <div class="container-fluid p-4">
         <div class="row block md:flex  justify-around">
@@ -79,19 +107,19 @@
             <div class="logo w-52 ">
               <img src="{% static 'assets/edc-logo.png' %}" alt="">
             </div>
-            <div class="clg font-medium">
+            <div class="clg font-bold">
               Team EDC <br> NIT Durgapur
             </div>
           </div>
           <div class="col-md-3 footer-contact w-max text-center">
             <h4 class="text-3xl font-normal border-b-2 border-slate-400">Contact Us</h4>
 
-            <ul class="block lg:flex socials justify-between">
-              <li class="px-6 py-4 w-max">
-                <i class="fa fa-phone "></i> : +91 85298 12646 : <span class="inline-block">(Ritesh Raj Sharma)</span>
+            <ul class="block lg:flex flex-col socials justify-between">
+              <li class="px-6 py-4 w-max font-bold ">
+                <i class="fa fa-phone "></i> : +91 85298 12646 &NonBreakingSpace; <span class="inline-block">( Ritesh Raj Sharma )</span>
               </li>
-              <li class="px-6 py-4 w-max">
-                <i class="fa fa-phone "></i> : +91 85298 12646 : <span class="inline-block">(Ritesh Raj Sharma)</span>
+              <li class="px-6 w-max font-bold">
+                <i class="fa fa-phone "></i> : +91 91230 01251 &NonBreakingSpace; <span class="inline-block">( Purvi Binani )</span>
               </li>
             </ul>
 
@@ -138,7 +166,7 @@
           </a>
         </li>
         <div class="col-lg-3 footer-info font-normal border-t border-slate-400 mt-4 pt-2">
-          <p style="text-align:center;" class="font-light">Made with <i class="fa fa-heart" aria-hidden="true"></i> by
+          <p style="text-align:center;" class="font-bold">Made with <i class="fa fa-heart" style="color: crimson;" aria-hidden="true"></i> by
             <a href="https://edcnitd.co.in/web_team"> Web-Team </a>
           </p>
           <p style="text-align:center; " class="font-extralight">© <span id="Auto_Year">2024</span> EDC. All Rights
@@ -151,5 +179,4 @@
   {% block script %}
   {% endblock script %}
 </body>
-
 </html>

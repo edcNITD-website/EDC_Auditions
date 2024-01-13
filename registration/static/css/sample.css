@@ -1,5 +1,5 @@
 .list{
-    display: flex;
+    display: flex !important; 
     flex-direction: column;
     justify-self: end;
 }
@@ -10,7 +10,7 @@ header::before{
     animation: spin 60s linear infinite;
 }
 button::before{
-    box-shadow: #1f242d 0px 0px 20px 2px;
+    /* box-shadow: #1f242d 0px 0px 20px 2px; */
 }
 header .img.bg{
     filter: saturate(800%) hue-rotate(165deg);

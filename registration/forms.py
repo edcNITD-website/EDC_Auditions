@@ -40,7 +40,7 @@ class BasicDetailsForm(forms.Form):
             Field('gender',css_class='choice bg-white/10 rounded-xl flex flex-row gap-4 justify-start items-start'),
             Field('year',css_class='choice bg-white/10 rounded-xl flex flex-row gap-4 justify-start items-start'),
             Field('domains', css_class='choice bg-white/10 rounded-xl flex flex-col gap-4 justify-start items-start'),
-            Submit('submit', 'Submit', css_class='p-2 mt-6 bg-white/10 text-white rounded-md mx-auto')
+            Submit('submit', 'Save and Go to Questions', css_class='p-2 mt-6 bg-white/10 text-white rounded-md mx-auto')
         )
 
 class QuestionsForm(forms.Form):
@@ -51,13 +51,13 @@ class QuestionsForm(forms.Form):
             if question.additional_data is not None:
                 extra = question.additional_data
             if question.type == "text":
-                self.fields[f'{question.id}'] = forms.CharField(label=question.question, max_length=500)
+                self.fields[f'{question.id}'] = forms.CharField(label=question.question, max_length=500,widget=forms.Textarea(attrs={'rows': 4}))
             elif question.type == "range":
                 self.fields[f'{question.id}'] = forms.IntegerField(label=question.question, widget=forms.widgets.NumberInput(attrs={'type': 'range', 'min': extra.get('min'), 'max': extra.get('max')}))
             elif question.type == "options":
                 options_string = extra.get('choice')
                 options = ast.literal_eval(options_string)
-                self.fields[f'{question.id}'] = forms.ChoiceField(label=question.question, choices=options,widget=forms.CheckboxInput)
+                self.fields[f'{question.id}'] = forms.ChoiceField(label=question.question, choices=options,widget=forms.RadioSelect)
         self.helper = FormHelper(self)        
         self.helper.form_class = 'flex flex-wrap justify-start items-start w-full gap-4'
         self.helper.add_input(Submit('submit', 'Submit',css_class='p-2  text-white rounded-md font-bold bg-white/10 mt-10'))
@@ -73,6 +73,6 @@ class PostsForm(forms.Form):
         self.helper.layout = Layout(
             Field('comment', css_class='border border-none rounded-xl bg-white/10 focus:outline-none w-80 h-12'),
             Field('round', css_class='border border-none rounded-xl bg-white/10 focus:outline-none focus:border-none '),
-            Submit('submit', 'Comment', css_class='p-2  text-white rounded-md font-bold bg-white/10 ')
+            Submit('submit', 'Comment', css_class='p-2 text-white rounded-md font-bold bg-white/10 ')
         )
 
