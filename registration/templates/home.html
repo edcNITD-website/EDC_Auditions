@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static tailwind_tags %}
 {% load socialaccount %}
+{% block title %}EDC Audition{% endblock title %}
 {% block css %}
 <link href="{% static 'css/sample.css' %}" rel="stylesheet">
 <style>
@@ -46,26 +47,31 @@
         <img src="{% static 'assets/NWWW1.png' %}" alt="" class="relative size-full club">
       </div>
     </div>
-
     <div
       class="w-[80%] md:w-[50%] relative top-[35%] left-8 md:left-12 lg:left-24 text-gradient-to-r from-green700 via-teal-400 to-blue-500">
       <h1 id="text" class="text-4xl sm:text-6xl font-[800] inline-block overflow-hidden content mr-3"> Welcome to </h1>
-      <span class="overflow-hidden inline-block">
-        <span
-          class="inline-block bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text text-5xl sm:text-7xl font-[800] leading-none"
-          id="audition">Auditions</span>
-      </span>
-      <div class="items-center mt-10 ">
-        <a href="{% provider_login_url 'google' %}?next=/">
-          <button style="display:flex"
-            class="relative overflow-hidden inherit text-center items-center rounded-full whitespace-nowrap bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-lg pl-3 pr-4 py-2 font-bold text-neutral-900 outline-none duration-200 before:bg-white before:w-full before:h-full before:absolute before:top-0 before:right-0 before:-translate-x-[65%] before:duration-300 before:rounded-full hover:before:translate-x-0  md:scale-125">
-            <img src="{% static 'assets\google.svg' %}" style="float:left; margin-right:0.5em"
-              class="h-6 w-6 relative md:scale-125 "> <a href="{% provider_login_url 'google' %}?next=/"
-              class=" relative ml-2"> Register </a> </button>
-        </a>
-      </div>
+      <span
+        class="bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text text-5xl sm:text-7xl font-[800] leading-none">Auditions</span>
+        {% if user.is_authenticated %}
+        <div class="items-center mt-10">
+          <a href="/details">
+            <button style="display:flex"
+            class="relative overflow-hidden inherit text-center items-center rounded-full whitespace-nowrap bg-white text-lg pl-3 pr-4 py-2 font-bold text-black outline-none duration-200 before:bg-white before:w-full before:h-full before:absolute before:top-0 before:right-0 before:-translate-x-[65%] before:duration-300 before:rounded-full hover:before:translate-x-0  md:scale-125 ">
+            <img src="{% static 'assets\person.gif' %}"
+              class="h-6 w-6 z-50 relative md:scale-125 "> <a href="/details" class="z-0 relative ml-2"> Go to your Profile </a> </button>
+          </a>
+        </div>
+            {% else %}
+            <div class="items-center mt-10 ">
+              <a href="{% provider_login_url 'google' %}?next=/">
+                <button style="display:flex"
+                class="relative overflow-hidden inherit text-center items-center rounded-full whitespace-nowrap bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-lg pl-3 pr-4 py-2 font-bold text-black outline-none duration-200 before:bg-white before:w-full before:h-full before:absolute before:top-0 before:right-0 before:translate-x-[calc(-100% + 90px)] before:duration-300 before:rounded-full hover:before:translate-x-0  md:scale-125">
+                <img src="{% static 'assets\google.svg' %}" style="float:left; margin-right:0.5em"
+                  class="h-6 w-6 z-50 relative md:scale-125 "> <a href="{% provider_login_url 'google' %}?next=/" class="z-0 relative ml-2"> Register </a> </button>
+              </a>
+            </div>
+        {% endif %}
     </div>
-
     <div
       class="desc absolute w-2/3 md:w-1/2 lg:w-1/3 left-8 md:left-12 lg:left-24  pl-4 text-neutral-400 bottom-24 overflow-hidden">
       <p>
@@ -75,12 +81,11 @@
     </div>
 
   </header>
-
   <section class="domains py-5 mx-auto group relative overflow-hidden">
     <div class="bg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90 md:rotate-0">
       <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player
         src="https://lottie.host/a028655e-5220-4664-9ee4-f0a526b4bde7/Qmx95F4X03.json" speed="1"
-        style="width: 1000px; height: 1000px" loop autoplay direction="1" mode="normal"></lottie-player>
+        style="height: 30vh" loop autoplay direction="1" mode="normal"></lottie-player>
     </div>
     <div class="">
       <h1
@@ -161,4 +166,34 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"></script>
 <script src="{% static 'js/sample.js' %}"></script>
+<script>
+  let text = new SplitType('#text');
+  let characters = document.querySelectorAll('.char');
+  for (i = 0; i < characters.length; i++) {
+    characters[i].classList.add('translate-y-full')
+  }
+  gsap.to('.char', {
+    y: 0,
+    stagger: 0.05,
+    delay: 0.5,
+    duration: 1,
+  });
+  let sections = document.querySelectorAll('.animate');
+  window.onscroll = () => {
+    sections.forEach(sec => {
+      let top = window.scrollY;
+      let offset = sec.offsetTop - 275;
+      let height = sec.offsetHeight;
+      if (top >= offset && top < offset + height) {
+        sec.classList.add('show-animate');
+      }
+    });
+  }
+
+let loader = document.getElementById("preloader");
+
+window.addEventListener("load", () => {
+  setTimeout(() => {loader.style.display = "none";}, 1000);
+});
+</script>
 {% endblock script %}

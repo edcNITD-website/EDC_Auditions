@@ -1,5 +1,4 @@
 // gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
 // create the scrollSmoother before your scrollTriggers
 // ScrollSmoother.create({
 //   smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
@@ -155,10 +154,3 @@ window.addEventListener("load", () => {
 //   }
 // })
 
-const mobileMenuButton = document.querySelector('.mobile-menu-button');
-const mobileView = document.getElementById('mobileView');
-
-mobileMenuButton.addEventListener('click', function () {
-  console.log('click');
-  mobileView.classList.toggle('hidden');
-});

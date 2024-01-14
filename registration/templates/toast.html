@@ -15,11 +15,9 @@
 document.addEventListener('DOMContentLoaded', function () {
         var toast = document.getElementById('toast-warning');
         var toastMessage = document.getElementById('toast-message');
-
         if (toastMessage.innerHTML !== '') {
             showToast();
         }
-
         function showToast(message) {
             toast.classList.remove('hidden');
         }

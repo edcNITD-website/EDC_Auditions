@@ -27,19 +27,19 @@ SECRET_KEY = 'django-insecure-1n4-__*bj&c(nxq@&p0_y5+y%0emw48b*=2d3vsm&j@ykdo5fu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'fontawesomefree', # new
     'crispy_forms', # new
     'django.contrib.sites', # new
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -84,6 +85,8 @@ TEMPLATES = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CRISPY_FAIL_SILENTLY = not DEBUG
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 WSGI_APPLICATION = 'audition.wsgi.application'
 
@@ -164,9 +167,13 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 2
+
 SOCIALACCOUNT_LOGIN_ON_GET=True
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = True
+SOCIALACCOUNT_STORE_TOKENS = True
+
+LOGIN_REDIRECT_URL = '/details'
+# LOGOUT_REDIRECT_URL = '/'
 
 TAILWIND_APP_NAME = 'registration'
 
@@ -174,4 +181,4 @@ INTERNAL_IPS=[
     "127.0.0.1",
 ]
 
-SOCIALACCOUNT_ADAPTER = 'registration.adapters.CustomSocialAccountAdapter'
+# SOCIALACCOUNT_ADAPTER = 'registration.adapters.CustomSocialAccountAdapter'

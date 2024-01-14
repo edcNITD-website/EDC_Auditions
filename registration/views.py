@@ -4,8 +4,11 @@ from . forms import BasicDetailsForm, QuestionsForm, PostsForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+import ast
 
 def home(request):
+    if request.user.is_authenticated:
+        return render(request,'home.html',{'message':'Checkout your profile'})
     return render(request,'home.html')
 
 def signup_redirect(request):
@@ -27,8 +30,8 @@ def club_members(request):
             students = Inductees.objects.filter(is_club_member=False).order_by('-round')
             return render(request, 'admin.html',{'students':students})
         else:
-            return redirect('home')        
-    return redirect('home')
+            return render(request,'home.html',{'message':'You are not an admin :( '})       
+    return render(request,'home.html',{'message':'Please login to continue'})
 
 def search(request,search_term="",category=""):
     user = request.user
@@ -98,6 +101,7 @@ def details(request):
                     student.place = form.cleaned_data['place']
                     student.phone_number = form.cleaned_data['Mobile_Number']
                     student.year = form.cleaned_data['year']
+                    student.domains = form.cleaned_data['domains']
                     student.save()
                     return redirect('ques')
                 else:
@@ -105,6 +109,8 @@ def details(request):
         else:
             if Inductees.objects.filter(user=request.user).exists():
                 student = get_object_or_404(Inductees, user = request.user)
+                choices = student.domains
+                options = ast.literal_eval(choices)
                 form = BasicDetailsForm(initial={
                 'name': student.full_name,
                 'gender': student.gender,
@@ -114,6 +120,7 @@ def details(request):
                 'place': student.place,
                 'Mobile_Number': student.phone_number,
                 'year': student.year,
+                'domains': options,
                 })
             else:
                 form = BasicDetailsForm()
@@ -122,9 +129,11 @@ def details(request):
         return render(request,'home.html',{'message':'Please login to continue'})
 
 def ques(request):
-    if request.user.is_authenticated:    
+    if request.user.is_authenticated:
         if Inductees.objects.filter(user=request.user).exists():
             student = get_object_or_404(Inductees, user = request.user)
+            if student.registration_no=="":
+                return redirect('details')
             questions = Question.objects.all()
             if request.method == 'POST':        
                 form = QuestionsForm(request.POST)
@@ -142,7 +151,7 @@ def ques(request):
                             answer = form.cleaned_data[f'{q.id}'] 
                             )
                             response.save()
-                    return redirect('home')
+                    return render(request, 'home.html', {'message':'Your response has been recorded'})
                 else:
                     return render(request, 'questions.html', {'form' : form})
             else:

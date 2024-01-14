@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load tailwind_tags %}
+{% load socialaccount %}
+{% block title %}Results{% endblock title %}
 {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+    #preloader{
+  background: #18191b no-repeat center center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  z-index: 100;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+}
     .shine:hover{
         transition: all 0.3s ease;
         background: linear-gradient(90deg, #2b2e33, #1e1e1e, white);
@@ -67,11 +80,13 @@
                 </div>
             </div>
           {% else %}
-          <div class="max-w-8xl px-5 mx-auto mt-32 text-center ">
+          <div class="max-w-8xl px-5 mx-auto mt-32 text-center mb-20">
             <h2 class="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-teal-400 to-blue-500 text-transparent bg-clip-text hover:bg-gradient-to-l ">
                 Results are On the way
             </h2>
-            
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+            <dotlottie-player src="https://lottie.host/af0120b4-aa45-4619-a919-eb3cc2473f64/uLBv11qfgJ.json" background="transparent" speed="1" style="height: 39vh;" loop autoplay></dotlottie-player>
         </div>
           {% endif %}
         </section>
