@@ -1,13 +1,41 @@
+:root {
+    --mouseX: 0;
+    --mouseY: 0;
+    --scrollY: 0;
+}
+.pointer{
+    --mouseX: 0;
+    --mouseY: 0;
+    --scrollY: 0;
+    top: calc(var(--mouseY) + var(--scrollY));
+    left: var(--mouseX);
+    /* transition: all .2s cubic-bezier(0,1,0,1); */
+    box-shadow: 10px 0px 100px 25px blue , -10px 0px 100px 25px green, 0px 10px 100px 25px teal,0px -10px 100px 25px teal;
+    animation: rotate 10s linear .3s infinite;
+    /* opacity: .5;
+    scale: .3; */
+}
+
 .list{
     display: flex !important; 
     flex-direction: column;
     justify-self: end;
 }
+nav li{
+    transition: all .3s ease-out;
+}
+nav li:hover{
+    text-shadow: 2px 2px 2px teal;
+    translate: -2px -2px;
+}
 header::before{
     clip-path: polygon(0 0, 40% 0, 60% 100%, 0% 100%);
 }
-.spin{
-    animation: spin 60s linear infinite;
+
+#audition{
+    background-image: repeating-linear-gradient(45deg,seagreen 0%, teal 10%, dodgerblue 20%,  teal 30%, seagreen 40%);
+    animation: gradient 6s ease infinite;
+    background-size: 600% 600%;
 }
 button::before{
     /* box-shadow: #1f242d 0px 0px 20px 2px; */
@@ -26,7 +54,8 @@ html{
 }
 .shadow{
     border-radius: 50%;
-    box-shadow: 100px 0px 300px 100px blue , -100px 0px 300px 100px green, 0px 100px 300px 100px seagreen,0px -100px 300px 100px seagreen;
+    box-shadow: 100px 0px 300px 100px blue , -100px 0px 300px 100px green, 0px 100px 300px 100px teal,0px -100px 300px 100px teal;
+    animation: rotate 10s linear .3s infinite;
 }
 .heading{
     border-bottom: 4px solid rgb(0, 128, 111);
@@ -45,6 +74,9 @@ header .content{
     opacity: .25;
     scale: .8;
 }
+.card lottie-player{
+    opacity: .8;
+}
 .slide{
     perspective: 100px;
 }
@@ -55,14 +87,14 @@ header .content{
     animation: scroll 40s linear infinite;
 }
 
-@keyframes scroll {
+/* @keyframes scroll {
     0% {
         transform: translateX(0);
     }
     100% {
         transform: translateX(calc(-300px *9 ));
     }
-} 
+}  */
 
 /* .card {
     border-radius: 5px;
@@ -70,17 +102,17 @@ header .content{
     box-shadow: 0 0 30px 5px orange;
   } */
 
-  h1{
+  /* h1{
     position: relative;
 }
 p{
     position: relative;
-}
+} */
 
-.parent {
+/* .parent {
     text-align: center;
   }
-  
+   */
   /* .card {
     border-radius: 5px;
     cursor: pointer;
@@ -140,15 +172,21 @@ p{
 .asteriskField{
     color: red;
 }
-
-@keyframes spin {
-    0%{
-        transform: rotate(0);
-    }
-    100%{
-        transform: rotate(360deg);
-    }
-}
 .toast{
     background-color: #18191b;
+}
+
+@keyframes gradient {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+@keyframes rotate {
+    from {
+        rotate: 0deg;
+    }
+    to {
+        rotate: 360deg;
+    }
 }

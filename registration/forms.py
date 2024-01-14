@@ -59,7 +59,7 @@ class QuestionsForm(forms.Form):
                 options = ast.literal_eval(options_string)
                 self.fields[f'{question.id}'] = forms.ChoiceField(label=question.question, choices=options,widget=forms.RadioSelect)
         self.helper = FormHelper(self)        
-        self.helper.form_class = 'flex flex-wrap justify-start items-start w-full gap-4'
+        self.helper.form_class = 'flex flex-col justify-start items-start max-w-6xl gap-4'
         self.helper.add_input(Submit('submit', 'Submit',css_class='p-2  text-white rounded-md font-bold bg-white/10 mt-10'))
 
 class PostsForm(forms.Form):

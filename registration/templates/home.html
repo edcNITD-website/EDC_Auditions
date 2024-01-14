@@ -5,46 +5,53 @@
 {% block css %}
 <link href="{% static 'css/sample.css' %}" rel="stylesheet">
 <style>
-  #preloader{
-  background: #18191b no-repeat center center;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  z-index: 100;
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-}
+  #preloader {
+    background: #18191b no-repeat center center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 100;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+  }
+
+  *::selection {
+    background-color: teal;
+    color: blue;
+  }
 </style>
 {% endblock css %}
 
 {% block content %}
 <div id="preloader">
-  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
-    <dotlottie-player src="https://lottie.host/9f6fd70b-d135-43bb-b4e3-5b5d74dadbdf/K1RCDqyq6C.json" background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay></dotlottie-player>
+  <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+  <dotlottie-player src="https://lottie.host/9f6fd70b-d135-43bb-b4e3-5b5d74dadbdf/K1RCDqyq6C.json"
+    background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay></dotlottie-player>
 </div>
-<main>
-  <header class="group  w-[100vw] relative h-[100vh] bg-neutral-950 overflow-hidden">
+<main class="overflow-hidden">
+  <header class="group  w-[100vw] relative h-[100vh] bg-neutral-950">
     <img src="{% static 'assets/bg1.jpg' %}" alt=""
-      class="bg img absolute w-full h-full opacity-20 z-10 hue-rotate-180 saturate-200 ">
-    <div class="bg poster absolute left-0 sm:right-0 sm:left-auto scale-75 translate-y-6 sm:translate-y-0 md:scale-100">
-      <div class="image w-[550px] m-32">
-        <div class="shadow absolute size-0 top-1/2 left-1/2 z-20"></div>
-        <div class="frame absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 scale-[3.2]">
+      class="bg img absolute w-full h-full opacity-20 hue-rotate-180 saturate-200 ">
+    <div class="pointer absolute" id="pointer"></div>
+    <div class="bg poster absolute left-0 sm:right-0 md:left-auto scale-75 top-1/2 -translate-y-1/2 md:scale-100">
+      <div class="image w-[550px] m-32 md:scale-90" data-speed="0.8">
+        <div class="shadow absolute size-0 top-1/2 left-1/2"></div>
+        <div class="frame absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-[3.2]">
           <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
           <lottie-player src="https://lottie.host/fc1e23de-2d9b-4b81-9f57-2aad85cc879b/oqzq7hLd1i.json" speed=".1"
             style="width: 300px; height: 300px" class="hue-rotate-180" loop autoplay direction="1"
             mode="normal"></lottie-player>
         </div>
-        <img src="{% static 'assets/NWWW1.png' %}" alt="" class="relative size-full club z-40">
+        <img src="{% static 'assets/NWWW1.png' %}" alt="" class="relative size-full club">
       </div>
     </div>
     <div
-      class="w-[80%] md:w-[50%] relative top-[35%] left-8 md:left-12 lg:left-24 text-gradient-to-r from-green700 via-teal-400 to-blue-500 z-40">
+      class="w-[80%] md:w-[50%] relative top-[35%] left-8 md:left-12 lg:left-24 text-gradient-to-r from-green700 via-teal-400 to-blue-500">
       <h1 id="text" class="text-4xl sm:text-6xl font-[800] inline-block overflow-hidden content mr-3"> Welcome to </h1>
       <span
-        class="bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text text-5xl sm:text-7xl font-[800] leading-none">Auditions</span>
+        class="bg-gradient-to-r from-green-700 via-teal-400 to-blue-500 text-transparent bg-clip-text text-5xl sm:text-7xl font-[800] leading-none" id="audition">Auditions</span>
         {% if user.is_authenticated %}
         <div class="items-center mt-10">
           <a href="/details">
@@ -66,7 +73,7 @@
         {% endif %}
     </div>
     <div
-      class="desc absolute w-2/3 md:w-1/2 lg:w-1/3 left-8 md:left-12 lg:left-24  pl-4 text-neutral-400 bottom-24 z-40">
+      class="desc absolute w-2/3 md:w-1/2 lg:w-1/3 left-8 md:left-12 lg:left-24  pl-4 text-neutral-400 bottom-24 overflow-hidden">
       <p>
         Ignite innovation with Team EDC, NIT Durgapur. Join us for a journey of entrepreneurship and endless
         opportunities!
@@ -78,7 +85,7 @@
     <div class="bg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-90 md:rotate-0">
       <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><lottie-player
         src="https://lottie.host/a028655e-5220-4664-9ee4-f0a526b4bde7/Qmx95F4X03.json" speed="1"
-        style="height: 30vh" loop autoplay direction="1" mode="normal"></lottie-player>
+        style="width: 1000px;height: 1000px;" loop autoplay direction="1" mode="normal"></lottie-player>
     </div>
     <div class="">
       <h1
@@ -86,10 +93,45 @@
         Domains Available </h1>
     </div>
     <div id="main"
-      class="max-w-[1000px] py-[30px] grid lg:grid-cols-2 sm:grid-cols-1  text-slate-300 gap-10 gap-y-24 justify-center justify-items-center m-14 items-center mx-auto">
+      class="max-w-[1000px] py-[30px] grid lg:grid-cols-2 sm:grid-cols-1  text-slate-300 gap-10 lg:gap-y-24 sm:gap-10 justify-center justify-items-center m-14 items-center mx-auto">
 
+      <div id="Event"
+        class=" card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[450px] relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
+        <div class="animation">
+          <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+            type="module"></script>
+
+          <lottie-player src="https://lottie.host/cc92a405-22be-404b-8789-32b8ece29da7/a2Bgvmzdq8.json" speed="1"
+            style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"></lottie-player>
+        </div>
+        <h3 class="text-center text-3xl font-[600] py-8 text-teal-300">Event Management</h3>
+        <p class="">Take Advantage of wide range of web development domains in our club and sharpen your skills, access
+          resources and construct your portfolio through various projects.</p>
+      </div>
+      <div id="GD"
+        class="card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[450px]  relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
+        <div class="animation">
+          <lottie-player src="https://lottie.host/250bd89f-5bf6-4b35-9cbb-b206fd7b72b8/BZbFnLATQK.json" speed="1"
+            style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"
+            class="m-auto"></lottie-player>
+        </div>
+        <h3 class="text-center text-3xl  font-[600] py-8 text-teal-300">Graphic Designing</h3>
+        <p class=""> Take the opportunity to explore the diverse design domains in our club and cultivate your
+          aesthetics, access resources, and expand your portfolio.</p>
+      </div>
+      <div id="Content"
+        class="card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[450px]  relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
+        <div class="animation">
+          <lottie-player src="https://lottie.host/c5f6c7ad-f34d-4c2a-b17e-c0e7f14df903/kFDc7ksOra.json" speed="1"
+            style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"
+            class="m-auto"></lottie-player>
+        </div>
+        <h3 class="text-center text-3xl  font-[600] py-8 text-teal-300">Content writing</h3>
+        <p class=""> We invite you to explore the various writing domains in our club and sharpen your writing skills,
+          gain experience, and enrich your portfolio.</p>
+      </div>
       <div id="WebD"
-        class=" card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 w-[400px] h-[450px] relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
+        class=" card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[450px] relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
         <div class="animation">
           <lottie-player src="https://lottie.host/ec70fef3-9957-402a-b8a5-7f2180491077/44ixoG0qKs.json" speed="1"
             style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"
@@ -101,7 +143,7 @@
       </div>
 
       <div id="Video"
-        class="card group  p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 w-[400px] h-[450px] relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-xl overflow-hidden scale-90 md:scale-100">
+        class="card group  p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[450px] relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-xl overflow-hidden scale-90 md:scale-100">
         <div class="animation">
           <lottie-player src="https://lottie.host/83e9a580-6c30-449b-884b-46766e378084/kPr6MzodA9.json" speed="1"
             style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"
@@ -112,34 +154,18 @@
           abilities, get access to resources, and strengthen your portfolio.</p>
       </div>
 
-      <div id="Content"
-        class="card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 w-[400px] h-[450px]  relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
-        <div class="animation">
-          <lottie-player src="https://lottie.host/c5f6c7ad-f34d-4c2a-b17e-c0e7f14df903/kFDc7ksOra.json" speed="1"
-            style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"
-            class="m-auto"></lottie-player>
-        </div>
-        <h3 class="text-center text-3xl  font-[600] py-8 text-teal-300">Content writing</h3>
-        <p class=""> We invite you to explore the various writing domains in our club and sharpen your writing skills,
-          gain experience, and enrich your portfolio.</p>
-      </div>
-      <div id="GD"
-        class="card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 w-[400px] h-[450px]  relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
-        <div class="animation">
-          <lottie-player src="https://lottie.host/250bd89f-5bf6-4b35-9cbb-b206fd7b72b8/BZbFnLATQK.json" speed="1"
-            style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"
-            class="m-auto"></lottie-player>
-        </div>
-        <h3 class="text-center text-3xl  font-[600] py-8 text-teal-300">Graphic Designing</h3>
-        <p class=""> Take the opportunity to explore the diverse design domains in our club and cultivate your
-          aesthetics, access resources, and expand your portfolio.</p>
-      </div>
+
+
     </div>
   </section>
 
 </main>
 {% endblock content %}
 {% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"></script>
+<script src="{% static 'js/sample.js' %}"></script>
 <script>
   let text = new SplitType('#text');
   let characters = document.querySelectorAll('.char');

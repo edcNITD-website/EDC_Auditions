@@ -4,15 +4,15 @@ import json
 
 class Inductees(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    rollnumber = models.CharField(max_length=9, blank=False, default='0')
-    department = models.CharField(max_length=50, blank=False, default='National Institute of Technology, Durgapur')
+    rollnumber = models.CharField(max_length=9, blank=False, default='')
+    department = models.CharField(max_length=50, blank=False, default='')
     is_club_member = models.BooleanField(default=False)
     profile_picture = models.URLField(blank=True)
     gender = models.CharField(max_length=10, choices=[('M','M'),('F','F'),('O','O'),],blank=True)
     full_name = models.CharField(max_length=255, blank=True)
     phone_number = models.CharField(max_length=10, blank=True)
     year = models.IntegerField(default=1)
-    registration_no = models.CharField(max_length=15,blank=True,default='0')
+    registration_no = models.CharField(max_length=15,blank=True,default='')
     place = models.CharField(max_length=50,blank=True)
     round = models.IntegerField(default=1)
     like = models.ManyToManyField(User, related_name='vote')

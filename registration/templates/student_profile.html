@@ -57,7 +57,7 @@
       <dotlottie-player src="https://lottie.host/9f6fd70b-d135-43bb-b4e3-5b5d74dadbdf/K1RCDqyq6C.json" background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay></dotlottie-player>
 </div>
 <main class="overflow-hidden flex flex-1 flex-col bg-[#18191b] text-white p-5">
-    <div class="max-w-lg mx-auto my-10 bg-white/10 rounded-lg shadow-md p-5">
+    <div style="margin-top: 8vh;" class="max-w-lg mx-auto my-10 bg-white/10 rounded-lg shadow-md p-5">
         <img class="w-32 h-32 rounded-full mx-auto" src="{{ student.profile_picture }}" alt="Profile picture">
         <h2 class="text-center text-2xl font-semibold mt-3"><i class="fa-solid fa-user"></i>&NonBreakingSpace;&NonBreakingSpace;{{student.full_name}}</h2>
         <div class="flex justify-end mt-5 ">
@@ -74,6 +74,11 @@
                 {% endif %}
             </form>
         </div>
+        <ul class="flex flex-row space-x-2 justify-center items-center mt-4">
+            {% for domain in student.domains %}
+            <li class="bg-pink-600 font-bold text-white text-xs px-3 py-3 rounded-3xl">{{domain}}</li>
+            {% endfor %}
+        </ul>
         <div class="mt-5">
           <h3 class="text-xl font-semibold"><i class="fa-regular fa-id-card"></i>&NonBreakingSpace;&NonBreakingSpace;General Info</h3>
           <div class="grid grid-cols-2 gap-4 px-2 w-full mt-5 mb-5">
@@ -123,7 +128,7 @@
          <h3 class="text-xl font-semibold"><i class="fa-solid fa-comments"></i>&NonBreakingSpace;&NonBreakingSpace;Answers</h3>
          <div class = "w-full flex flex-col mt-5 mb-10">
             {% for answer in answers %}
-            <div class="flex flex-col justify-center rounded-2xl bg-[#54575F] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
+            <div class="flex flex-col justify-center rounded-2xl mb-5 bg-[#54575F] bg-clip-border px-3 py-4 shadow-3xl shadow-shadow-500 dark:!bg-navy-700 dark:shadow-none">
                 <p class="text-sm text-white opacity-50">{{answer.question}}</p>
                 <p class="text-base font-medium text-navy-700 dark:text-white mt-2">
                     {{answer.answer}}
