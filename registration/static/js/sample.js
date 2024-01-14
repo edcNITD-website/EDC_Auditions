@@ -52,11 +52,11 @@ document.addEventListener('scroll', (e) => {
 
 var tl = gsap.timeline();
 
-let loader = document.getElementById("preloader");
+let loader1 = document.getElementById("preloader");
 
 window.addEventListener("load", () => {
   setTimeout(() => {
-    loader.style.display = "none";
+    loader1.style.display = "none";
   }, 3000);
 
   tl.to('#preloader', {

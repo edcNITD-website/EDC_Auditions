@@ -16,7 +16,7 @@ class BasicDetailsForm(forms.Form):
     domains = forms.MultipleChoiceField(
         label='Domains (You can select multiple)',
         choices=[
-            ('WEB DEVELOPEMENT', 'WEB DEVELOPEMENT'),
+            ('WEB/APP DEVELOPEMENT', 'WEB/APP DEVELOPEMENT'),
             ('VIDEO EDITING', 'VIDEO EDITING'),
             ('CONTENT WRITING', 'CONTENT WRITING'),
             ('EVENT MANAGEMENT', 'EVENT MANAGEMENT'),
