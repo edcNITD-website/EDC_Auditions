@@ -74,10 +74,12 @@
             <a href="/details"
               class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 text-center">Profile</a>
           </li>
+          {% if admin %}
           <li>
             <a href="/club-members"
               class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 text-center">Admin</a>
           </li>
+          {% endif %}
           {% if user.is_authenticated %}
           <form method="post" action="{% url 'account_logout' %}">
             {% csrf_token %}

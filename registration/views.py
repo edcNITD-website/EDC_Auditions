@@ -2,12 +2,17 @@ from django.shortcuts import render,redirect, get_object_or_404
 from .models import Inductees,Question, Response, Posts, Result
 from . forms import BasicDetailsForm, QuestionsForm, PostsForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-import ast
+import ast, csv
 
 def home(request):
     if request.user.is_authenticated:
+        user = request.user
+        if Inductees.objects.filter(user=user).exists():
+            student = get_object_or_404(Inductees, user = user)
+            if student.is_club_member:
+                return render(request,'home.html',{'message':'Welcome Admin!!','admin':True})
         return render(request,'home.html',{'message':'Checkout your profile'})
     return render(request,'home.html')
 
@@ -28,7 +33,7 @@ def club_members(request):
         is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
         if is_club_member:
             students = Inductees.objects.filter(is_club_member=False).order_by('-round')
-            return render(request, 'admin.html',{'students':students})
+            return render(request, 'admin.html',{'students':students,'admin':True})
         else:
             return render(request,'home.html',{'message':'You are not an admin :( '})       
     return render(request,'home.html',{'message':'Please login to continue'})
@@ -55,7 +60,7 @@ def search(request,search_term="",category=""):
                         students = Inductees.objects.filter(is_club_member=False)
                     else:
                         students = Inductees.objects.filter(is_club_member=False,department__icontains=search_term).order_by('-round')
-            return render(request, 'admin.html',{'students':students,'message':f'Search results for {search_term}'})
+            return render(request, 'admin.html',{'students':students,'message':f'Search results for {search_term}','admin':True})
     return redirect('home')
 
 def student_profile(request,id):
@@ -64,6 +69,10 @@ def student_profile(request,id):
         is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
         if is_club_member:
             student = Inductees.objects.get(id=id)
+            if student.domains != "":
+                student.domains = ast.literal_eval(student.domains)
+            else:
+                student.domains = []
             comments = Posts.objects.filter(user=student)
             likes = student.total_likes()
             answers = Response.objects.filter(student=student)
@@ -82,7 +91,7 @@ def student_profile(request,id):
                 )
                 post.save()
                 return redirect('student_profile',id=id)
-            return render(request,'student_profile.html',{'student':student,'comments2':comments.filter(year = 2).order_by('-round'),'comments3':comments.filter(year=3).order_by('-round'),'comments4':comments.filter(year=4).order_by('-round'), 'form':form, 'answers':answers, 'allow':allow,'likes':likes,'liked':liked})
+            return render(request,'student_profile.html',{'student':student,'comments2':comments.filter(year = 2).order_by('-round'),'comments3':comments.filter(year=3).order_by('-round'),'comments4':comments.filter(year=4).order_by('-round'), 'form':form, 'answers':answers, 'allow':allow,'likes':likes,'liked':liked,'admin':True})
         return redirect('home') 
     return redirect('home')
 
@@ -110,7 +119,10 @@ def details(request):
             if Inductees.objects.filter(user=request.user).exists():
                 student = get_object_or_404(Inductees, user = request.user)
                 choices = student.domains
-                options = ast.literal_eval(choices)
+                if choices != "":
+                    options = ast.literal_eval(choices)
+                else:
+                    options = []
                 form = BasicDetailsForm(initial={
                 'name': student.full_name,
                 'gender': student.gender,
@@ -213,3 +225,70 @@ def mark(request,id,type):
             return redirect('home')
     else:
         return redirect('home')
+    
+
+def StudentsCSV(request):
+    if request.user.username == 'admin':
+        students = Inductees.objects.filter(is_club_member=False).all()
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="students.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+        return response
+
+def WEBCSV(request):
+    if request.user.username == 'admin':
+        students = Inductees.objects.filter(is_club_member=False,domains__icontains='WEB DEVELOPEMENT').all()
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="web.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+        return response
+    
+def GdCSV(request):
+    if request.user.username == 'admin':
+        students = Inductees.objects.filter(is_club_member=False,domains__icontains='GRAPHIC DESIGNING').all()
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="gd.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+        return response
+    
+def contentCSV(request):
+    if request.user.username == 'admin':
+        students = Inductees.objects.filter(is_club_member=False,domains__icontains='CONTENT WRITING').all()
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="content.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+        return response
+    
+def eventCSV(request):
+    if request.user.username == 'admin':
+        students = Inductees.objects.filter(is_club_member=False,domains__icontains='EVENT MANAGEMENT').all()
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="event.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+        return response
+        
+def videoCSV(request):
+    if request.user.username == 'admin':
+        students = Inductees.objects.filter(is_club_member=False,domains__icontains='VIDEO EDITING').all()
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="video.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+        return response
