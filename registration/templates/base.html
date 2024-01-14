@@ -17,13 +17,13 @@
 
 <body class="overflow-x-hidden leading-normal tracking-normal text-white font-Roboto bg-neutral-900">
 
-  <nav class="bg-gray-900/50 backdrop-blur-md fixed w-full top-0 start-0 border-gray-200 dark:border-gray-600 z-50">
+  <nav class="bg-gray-900/50 backdrop-blur-md fixed w-full top-0 start-0 border-gray-200 z-50">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 transition-all pl-10">
       <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
         <img src="{% static 'assets/edc-logo.png' %}" class="h-8 scale-[2] -hue-rotate-180 md:ml-2" alt="Flowbite Logo">
       </a>
       <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <button type="button" class="hidden md:block text-neutral-50 border-2 border-teal-400 rounded py-1 px-3">
+        <button type="button" class="hidden md:block text-neutral-50 border-2 border-teal-400 rounded-lg py-1 px-3 shadow-inner shadow-teal-400 hover:bg-teal-400 hover:text-neutral-900 ease-in duration-300">
           Login
         </button>
         <button data-collapse-toggle="navbar-sticky" type="button"
@@ -42,24 +42,24 @@
           class="flex flex-col p-4 md:p-0 mt-4 font-medium borderrounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
           <li>
             <a href="/" 
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0"
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 hover: md:p-0 text-center"
               aria-current="page">Home</a>
           </li>
           <li>
             <a href="https://edcnitd.co.in/" target="_blank"
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">EDC</a>
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 text-center">EDC</a>
           </li>
           <li>
             <a href="/questions"
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Questions</a>
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 text-center">Questions</a>
           </li>
           <li>
             <a href="/results"
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 ">Results</a>
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 text-center">Results</a>
           </li>
           <li>
             <a href="{% provider_login_url 'google' %}?next=/"
-              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 md:hidden">Login</a>
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 md:hidden text-center">Login</a>
           </li>
         </ul>
       </div>
@@ -72,21 +72,21 @@
   {% block content %}
   {% endblock content %}
   <footer id="footer">
-    <div class="footer-top bg-zinc-800 font-light text-neutral-300">
+    <div class="footer-top bg-zinc-800 font-light text-neutral-300 overflow-hidden relative z-50">
       <div class="container-fluid p-4">
         <div class="row block md:flex  justify-around">
-          <div class="flex items-center gap-5">
-            <div class="logo w-52 ">
+          <div class="flex items-center gap-5 mx-auto lg:gap-10">
+            <div class="logo w-52 lg:w-80">
               <img src="{% static 'assets/edc-logo.png' %}" alt="">
             </div>
             <div class="clg font-medium">
               Team EDC <br> NIT Durgapur
             </div>
           </div>
-          <div class="col-md-3 footer-contact w-max text-center">
+          <div class="col-md-3 footer-contact w-max text-center mx-auto">
             <h4 class="text-3xl font-normal border-b-2 border-slate-400">Contact Us</h4>
 
-            <ul class="block lg:flex socials justify-between">
+            <ul class="block lg:flex-col socials justify-between">
               <li class="px-6 py-4 w-max">
                 <i class="fa fa-phone "></i> : +91 85298 12646 : <span class="inline-block">(Ritesh Raj Sharma)</span>
               </li>
@@ -98,7 +98,7 @@
           </div>
 
         </div>
-        <li class="social-links my-4 flex gap-1 mx-auto items-center justify-center">
+        <div class="social-links my-4 flex gap-1 mx-auto items-center justify-center">
           <a target="_blank" href="https://twitter.com/edcnitd" class="twitter">
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 32 32"
               fill="#D4D4D4">
@@ -136,9 +136,9 @@
               </path>
             </svg>
           </a>
-        </li>
+        </div>
         <div class="col-lg-3 footer-info font-normal border-t border-slate-400 mt-4 pt-2">
-          <p style="text-align:center;" class="font-light">Made with <i class="fa fa-heart" aria-hidden="true"></i> by
+          <p style="text-align:center;" class="font-light">Made with <i class="fa fa-heart text-red-500" aria-hidden="true"></i> by
             <a href="https://edcnitd.co.in/web_team"> Web-Team </a>
           </p>
           <p style="text-align:center; " class="font-extralight">© <span id="Auto_Year">2024</span> EDC. All Rights
@@ -146,7 +146,6 @@
         </div>
       </div>
   </footer>
-  <script src="{% static 'js/sample.js' %}"></script>
   <script src="{% static 'js/website.js' %}"></script>
   {% block script %}
   {% endblock script %}
