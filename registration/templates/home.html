@@ -58,7 +58,7 @@
             <button style="display:flex"
             class="relative overflow-hidden inherit text-center items-center rounded-full whitespace-nowrap bg-white text-lg pl-3 pr-4 py-2 font-bold text-black outline-none duration-200 before:bg-white before:w-full before:h-full before:absolute before:top-0 before:right-0 before:-translate-x-[65%] before:duration-300 before:rounded-full hover:before:translate-x-0  md:scale-125 ">
             <img src="{% static 'assets\person.gif' %}"
-              class="h-6 w-6 z-50 relative md:scale-125 "> <a href="/details" class="z-0 relative ml-2"> Go to your Profile </a> </button>
+              class="h-6 w-6 z-50 relative md:scale-125 "><a href="/details" class="z-0 relative ml-2"> Go to your Profile </a> </button>
           </a>
         </div>
             {% else %}
@@ -96,7 +96,7 @@
       class="max-w-[1000px] py-[30px] grid lg:grid-cols-2 sm:grid-cols-1  text-slate-300 gap-10 lg:gap-y-24 sm:gap-10 justify-center justify-items-center m-14 items-center mx-auto">
 
       <div id="Event"
-        class=" card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[450px] relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
+        class=" card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[480px] md:h-[450px] relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
         <div class="animation">
           <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
             type="module"></script>
@@ -105,8 +105,8 @@
             style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"></lottie-player>
         </div>
         <h3 class="text-center text-3xl font-[600] py-8 text-teal-300">Event Management</h3>
-        <p class="">Take Advantage of wide range of web development domains in our club and sharpen your skills, access
-          resources and construct your portfolio through various projects.</p>
+        <p class="">Take Advantage of event management domain in our club and sharpen your skills, access
+          resources and network with like-minded people.</p>
       </div>
       <div id="GD"
         class="card group p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[450px]  relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-lg overflow-hidden scale-90 md:scale-100">
@@ -154,8 +154,17 @@
           abilities, get access to resources, and strengthen your portfolio.</p>
       </div>
 
-
-
+      <div id="App"
+        class="card group  p-14 backdrop-blur-sm rounded-3xl border border-neutral-500 max-w-[92%] w-[400px] h-[450px] relative shadow-inner shadow-teal-200 bg-teal-100/5 backdrop:blur-xl overflow-hidden scale-90 md:scale-100">
+      <div class="animation">
+          <lottie-player src="https://lottie.host/ec70fef3-9957-402a-b8a5-7f2180491077/44ixoG0qKs.json" speed="1"
+            style="width: 300px; height: 300px" loop autoplay direction="1" mode="normal"
+            class="m-auto"></lottie-player>
+        </div>
+        <h3 class="text-center text-3xl  font-[600] py-8 text-teal-300">App Development</h3>
+        <p class=""> Get access to wide range of app development oppurtunities in our club and sharpen your skills, access
+          resources and construct your portfolio through various projects.</p>
+      </div>
     </div>
   </section>
 
@@ -167,28 +176,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"></script>
 <script src="{% static 'js/sample.js' %}"></script>
 <script>
-  let text = new SplitType('#text');
-  let characters = document.querySelectorAll('.char');
-  for (i = 0; i < characters.length; i++) {
-    characters[i].classList.add('translate-y-full')
-  }
-  gsap.to('.char', {
-    y: 0,
-    stagger: 0.05,
-    delay: 0.5,
-    duration: 1,
-  });
-  let sections = document.querySelectorAll('.animate');
-  window.onscroll = () => {
-    sections.forEach(sec => {
-      let top = window.scrollY;
-      let offset = sec.offsetTop - 275;
-      let height = sec.offsetHeight;
-      if (top >= offset && top < offset + height) {
-        sec.classList.add('show-animate');
-      }
-    });
-  }
+  // let text = new SplitType('#text');
+  // let characters = document.querySelectorAll('.char');
+  // for (i = 0; i < characters.length; i++) {
+  //   characters[i].classList.add('translate-y-full')
+  // }
+  // gsap.to('.char', {
+  //   y: 0,
+  //   stagger: 0.05,
+  //   delay: 0.5,
+  //   duration: 1,
+  // });
+  // let sections = document.querySelectorAll('.animate');
+  // window.onscroll = () => {
+  //   sections.forEach(sec => {
+  //     let top = window.scrollY;
+  //     let offset = sec.offsetTop - 275;
+  //     let height = sec.offsetHeight;
+  //     if (top >= offset && top < offset + height) {
+  //       sec.classList.add('show-animate');
+  //     }
+  //   });
+  // }
 
 let loader = document.getElementById("preloader");
 

@@ -240,7 +240,7 @@ def StudentsCSV(request):
 
 def WEBCSV(request):
     if request.user.username == 'admin':
-        students = Inductees.objects.filter(is_club_member=False,domains__icontains='WEB DEVELOPEMENT').all()
+        students = Inductees.objects.filter(is_club_member=False,domains__icontains='WEB/APP DEVELOPEMENT').all()
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="web.csv"'
         writer = csv.writer(response)
