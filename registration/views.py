@@ -1,5 +1,8 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from .models import Inductees,Question, Response, Posts, Result
+from .models import Inductees, Question, Response, Posts, Result
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from . forms import BasicDetailsForm, QuestionsForm, PostsForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
@@ -292,3 +295,55 @@ def videoCSV(request):
         for student in students:
             writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
         return response
+
+def handleLogin(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user_obj = User.objects.filter(email=email).first()
+        if user_obj is None:
+            messages.success(request, 'Please create an account first')
+            return redirect('/login')
+        user = authenticate(username=email, password=password)
+        if user is None:
+            messages.success(request, 'Wrong password or email address')
+            return redirect('/login')
+        login(request, user)
+        messages.success(request, 'Logged in successfully')
+        return redirect('/details')
+    else:
+        if request.user.is_authenticated:
+            return redirect('/details')
+        return render(request, 'login.html')
+
+def handleSignUp(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        first_name = request.POST.get('first-name')
+        last_name = request.POST.get('last-name')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        try:
+            if User.objects.filter(email=email).first():
+                messages.success(request, 'Email already exists. Login in to continue')
+                return redirect('/login')
+            if str(password1) != str(password2):
+                messages.success(request, 'Passwords do not match')
+                return redirect('/sign-up')
+            user =  User.objects.create_user(email, email, password1)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+            full_name = first_name + " " + last_name
+            profile_picture = "https://ui-avatars.com/api/?name=" + full_name.replace(" ", "+")
+            inductee = Inductees(user=user, full_name=full_name, profile_picture=profile_picture)
+            inductee.save()
+            messages.success(request, 'Account created successfully')
+            return redirect('/login')
+        except Exception as e:
+            messages.success(request, 'Something went wrong')
+            return redirect('/')
+    else:
+        if request.user.is_authenticated:
+            return redirect('/details')
+        return render(request, 'sign-up.html')
