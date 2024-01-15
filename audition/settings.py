@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'allauth.account', # new
     'allauth.socialaccount', # new
     'allauth.socialaccount.providers.google', # new
-    'django_browser_reload',
+    # 'django_browser_reload',
     'tailwind',
     'registration',
 ]
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
-    'django_browser_reload.middleware.BrowserReloadMiddleware'
+    # 'django_browser_reload.middleware.BrowserReloadMiddleware'
 ]
 
 ROOT_URLCONF = 'audition.urls'
@@ -170,7 +170,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 SOCIALACCOUNT_STORE_TOKENS = True
 
 LOGIN_REDIRECT_URL = '/details'
-# LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 TAILWIND_APP_NAME = 'registration'
 
@@ -179,3 +179,4 @@ INTERNAL_IPS=[
 ]
 
 # SOCIALACCOUNT_ADAPTER = 'registration.adapters.CustomSocialAccountAdapter'
+NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
