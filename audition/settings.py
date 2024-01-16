@@ -179,4 +179,4 @@ INTERNAL_IPS=[
 ]
 
 # SOCIALACCOUNT_ADAPTER = 'registration.adapters.CustomSocialAccountAdapter'
-NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+# NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"

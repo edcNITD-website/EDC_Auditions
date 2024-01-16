@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Poppins:wght@200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&family=Rokkitt:wght@500;600;700&display=swap');
 
 /*
-! tailwindcss v3.4.1 | MIT License | https://tailwindcss.com
+! tailwindcss v3.3.5 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -34,11 +34,9 @@
 4. Use the user's configured `sans` font-family by default.
 5. Use the user's configured `sans` font-feature-settings by default.
 6. Use the user's configured `sans` font-variation-settings by default.
-7. Disable tap highlights on iOS
 */
 
-html,
-:host {
+html {
   line-height: 1.5;
   /* 1 */
   -webkit-text-size-adjust: 100%;
@@ -48,14 +46,12 @@ html,
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
   font-variation-settings: normal;
   /* 6 */
-  -webkit-tap-highlight-color: transparent;
-  /* 7 */
 }
 
 /*
@@ -127,10 +123,8 @@ strong {
 }
 
 /*
-1. Use the user's configured `mono` font-family by default.
-2. Use the user's configured `mono` font-feature-settings by default.
-3. Use the user's configured `mono` font-variation-settings by default.
-4. Correct the odd `em` font sizing in all browsers.
+1. Use the user's configured `mono` font family by default.
+2. Correct the odd `em` font sizing in all browsers.
 */
 
 code,
@@ -139,12 +133,8 @@ samp,
 pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   /* 1 */
-  font-feature-settings: normal;
-  /* 2 */
-  font-variation-settings: normal;
-  /* 3 */
   font-size: 1em;
-  /* 4 */
+  /* 2 */
 }
 
 /*
@@ -1122,14 +1112,6 @@ input[type="range"]::-ms-fill-lower{
   border-width: 0;
 }
 
-.visible{
-  visibility: visible;
-}
-
-.collapse{
-  visibility: collapse;
-}
-
 .static{
   position: static;
 }
@@ -1144,10 +1126,6 @@ input[type="range"]::-ms-fill-lower{
 
 .relative{
   position: relative;
-}
-
-.sticky{
-  position: sticky;
 }
 
 .inset-x-0{
@@ -1217,10 +1195,6 @@ input[type="range"]::-ms-fill-lower{
 
 .z-50{
   z-index: 50;
-}
-
-.m-0{
-  margin: 0px;
 }
 
 .m-14{
@@ -1295,10 +1269,6 @@ input[type="range"]::-ms-fill-lower{
 
 .-mt-4{
   margin-top: -1rem;
-}
-
-.mb-0{
-  margin-bottom: 0px;
 }
 
 .mb-10{
@@ -1441,30 +1411,12 @@ input[type="range"]::-ms-fill-lower{
   display: inline-flex;
 }
 
-.table{
-  display: table;
-}
-
 .grid{
   display: grid;
 }
 
-.contents{
-  display: contents;
-}
-
 .hidden{
   display: none;
-}
-
-.size-0{
-  width: 0px;
-  height: 0px;
-}
-
-.size-full{
-  width: 100%;
-  height: 100%;
 }
 
 .h-10{
@@ -1519,20 +1471,12 @@ input[type="range"]::-ms-fill-lower{
   height: 480px;
 }
 
-.h-auto{
-  height: auto;
-}
-
 .h-full{
   height: 100%;
 }
 
 .h-px{
   height: 1px;
-}
-
-.h-screen{
-  height: 100vh;
 }
 
 .w-1\/2{
@@ -1647,10 +1591,6 @@ input[type="range"]::-ms-fill-lower{
 
 .flex-1{
   flex: 1 1 0%;
-}
-
-.border-collapse{
-  border-collapse: collapse;
 }
 
 .origin-top-right{
@@ -1963,11 +1903,6 @@ input[type="range"]::-ms-fill-lower{
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-.bg-gray-50{
-  --tw-bg-opacity: 1;
-  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-
 .bg-gray-600{
   --tw-bg-opacity: 1;
   background-color: rgb(75 85 99 / var(--tw-bg-opacity));
@@ -2231,10 +2166,6 @@ input[type="range"]::-ms-fill-lower{
 
 .font-Roboto{
   font-family: Roboto;
-}
-
-.font-serif{
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
 .text-2xl{
@@ -2766,6 +2697,10 @@ input[type="range"]::-ms-fill-lower{
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
+:is([dir="rtl"] .rtl\:space-x-reverse) > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 1;
+}
+
 :is(.dark .dark\:border-gray-400){
   --tw-border-opacity: 1;
   border-color: rgb(156 163 175 / var(--tw-border-opacity));
@@ -2863,16 +2798,6 @@ input[type="range"]::-ms-fill-lower{
   .sm\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .sm\:text-xs{
-    font-size: 0.75rem;
-    line-height: 1rem;
-  }
-
-  .sm\:text-base{
-    font-size: 1rem;
-    line-height: 1.5rem;
   }
 
   .sm\:leading-6{
@@ -3027,16 +2952,6 @@ input[type="range"]::-ms-fill-lower{
     padding-top: 1.5rem;
   }
 
-  .md\:text-base{
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  .md\:text-xs{
-    font-size: 0.75rem;
-    line-height: 1rem;
-  }
-
   .md\:hover\:bg-transparent:hover{
     background-color: transparent;
   }
@@ -3087,8 +3002,4 @@ input[type="range"]::-ms-fill-lower{
   .lg\:pt-12{
     padding-top: 3rem;
   }
-}
-
-.rtl\:space-x-reverse:where([dir="rtl"], [dir="rtl"] *) > :not([hidden]) ~ :not([hidden]){
-  --tw-space-x-reverse: 1;
 }
