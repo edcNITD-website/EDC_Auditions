@@ -33,8 +33,13 @@
         </button>
         </form>
             {% else %}
-        <a href="{% provider_login_url 'google' %}?next=/">
-          <button type="button" class="hidden md:block text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2 text-center me-2 mb-2 font-bold text-md">
+        <a href="/sign-up">
+          <button type="button" class="hidden md:block text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 rounded-lg text-sm px-5 py-2 text-center me-2 mb-2 font-bold text-md">
+          Sign Up
+        </button>
+        </a>
+        <a href="/login" class="ml-5">
+          <button type="button" class="hidden md:block text-white border border-cyan-500 focus:ring-2 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 rounded-lg text-sm px-5 py-2 text-center me-2 mb-2 font-bold text-md">
           Login
         </button>
         </a>
@@ -89,7 +94,11 @@
           </form>
           {% else %}
           <li>
-            <a href="{% provider_login_url 'google' %}?next=/"
+            <a href="/sign-up"
+              class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 md:hidden text-center">Sign Up</a>
+          </li>
+          <li>
+            <a href="/login"
               class="block py-2 px-3 text-neutral-400 rounded md:hover:bg-transparent hover:text-teal-400 md:p-0 md:hidden text-center">Login</a>
           </li>
           {% endif %}
