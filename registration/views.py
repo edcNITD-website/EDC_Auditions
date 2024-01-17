@@ -247,9 +247,9 @@ def WEBCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="web.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
         return response
     
 def GdCSV(request):
@@ -258,9 +258,9 @@ def GdCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="gd.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
         return response
     
 def contentCSV(request):
@@ -269,9 +269,9 @@ def contentCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="content.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
         return response
     
 def eventCSV(request):
@@ -280,9 +280,9 @@ def eventCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="event.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
         return response
         
 def videoCSV(request):
@@ -291,9 +291,9 @@ def videoCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="video.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
         return response
 
 def handleLogin(request):
