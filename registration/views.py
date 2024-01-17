@@ -236,9 +236,9 @@ def StudentsCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="students.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
         return response
 
 def WEBCSV(request):
