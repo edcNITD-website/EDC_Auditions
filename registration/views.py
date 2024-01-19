@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 import ast, csv
+from django.db.models import Q
 
 def home(request):
     if request.user.is_authenticated:
@@ -236,10 +237,12 @@ def StudentsCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="students.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
         return response
+    else:
+        return redirect('home')
 
 def WEBCSV(request):
     if request.user.username == 'admin':
@@ -247,10 +250,12 @@ def WEBCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="web.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
         return response
+    else:
+        return redirect('home')
     
 def GdCSV(request):
     if request.user.username == 'admin':
@@ -258,10 +263,12 @@ def GdCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="gd.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
         return response
+    else:
+        return redirect('home')
     
 def contentCSV(request):
     if request.user.username == 'admin':
@@ -269,10 +276,12 @@ def contentCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="content.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
         return response
+    else:
+        return redirect('home')
     
 def eventCSV(request):
     if request.user.username == 'admin':
@@ -280,10 +289,12 @@ def eventCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="event.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
         return response
+    else:
+        return redirect('home')
         
 def videoCSV(request):
     if request.user.username == 'admin':
@@ -291,10 +302,12 @@ def videoCSV(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="video.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number'])
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
         for student in students:
-            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number])
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
         return response
+    else:
+        return redirect('home')
 
 def handleLogin(request):
     if request.method == 'POST':
@@ -347,3 +360,31 @@ def handleSignUp(request):
         if request.user.is_authenticated:
             return redirect('/details')
         return render(request, 'sign-up.html')
+    
+
+def MaleCSV(request):
+    if request.user.username == 'admin':
+        students = Inductees.objects.filter(Q(gender='M')|Q(gender=''),is_club_member=False).all()
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="malestudents.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
+        return response
+    else:
+        return redirect('home')
+    
+def FemaleCSV(request):
+    if request.user.username == 'admin':
+        students = Inductees.objects.filter(is_club_member=False,gender='F',).all()#gender=f or gender = blank
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="femalestudents.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
+        return response
+    else:
+        return redirect('home')
+    

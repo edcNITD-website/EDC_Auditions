@@ -16,5 +16,11 @@ urlpatterns = [
     path('like/<int:id>',views.like,name='like_student'),
     path('mark/<int:id>/<int:type>',views.mark,name="mark"),
     path('StudentsCSV', views.StudentsCSV, name="StudentsCSV"),
-    path('WEBCSV', views.WEBCSV, name="WEBCSV"),
+    path('WebCSV', views.WEBCSV, name="WEBCSV"),
+    path('EventCSV', views.eventCSV, name="EventCSV"),
+    path('ContentCSV', views.contentCSV, name="ContentCSV"),
+    path('TechCSV', views.videoCSV, name="TechCSV"),
+    path('GraphicCSV', views.GdCSV, name="GraphicCSV"),
+    path('MaleCSV', views.MaleCSV, name="MaleCSV"),
+    path('FemaleCSV', views.FemaleCSV, name="FemaleCSV"),
 ]
