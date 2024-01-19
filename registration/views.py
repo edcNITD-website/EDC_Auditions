@@ -234,6 +234,7 @@ def mark(request,id,type):
 def StudentsCSV(request):
     if request.user.username == 'admin':
         students = Inductees.objects.filter(is_club_member=False).all()
+        students.order_by('-round')
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="students.csv"'
         writer = csv.writer(response)
@@ -247,6 +248,7 @@ def StudentsCSV(request):
 def WEBCSV(request):
     if request.user.username == 'admin':
         students = Inductees.objects.filter(is_club_member=False,domains__icontains='WEB/APP DEVELOPEMENT').all()
+        students.order_by('-round')
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="web.csv"'
         writer = csv.writer(response)
@@ -260,6 +262,7 @@ def WEBCSV(request):
 def GdCSV(request):
     if request.user.username == 'admin':
         students = Inductees.objects.filter(is_club_member=False,domains__icontains='GRAPHIC DESIGNING').all()
+        students.order_by('-round')
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="gd.csv"'
         writer = csv.writer(response)
@@ -273,6 +276,7 @@ def GdCSV(request):
 def contentCSV(request):
     if request.user.username == 'admin':
         students = Inductees.objects.filter(is_club_member=False,domains__icontains='CONTENT WRITING').all()
+        students.order_by('-round')
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="content.csv"'
         writer = csv.writer(response)
@@ -286,6 +290,7 @@ def contentCSV(request):
 def eventCSV(request):
     if request.user.username == 'admin':
         students = Inductees.objects.filter(is_club_member=False,domains__icontains='EVENT MANAGEMENT').all()
+        students.order_by('-round')
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="event.csv"'
         writer = csv.writer(response)
@@ -299,6 +304,7 @@ def eventCSV(request):
 def videoCSV(request):
     if request.user.username == 'admin':
         students = Inductees.objects.filter(is_club_member=False,domains__icontains='VIDEO EDITING').all()
+        students.order_by('-round')
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="video.csv"'
         writer = csv.writer(response)
@@ -363,8 +369,9 @@ def handleSignUp(request):
     
 
 def MaleCSV(request):
-    if request.user.username == 'admin':
+    if request.user.username == 'mine':
         students = Inductees.objects.filter(Q(gender='M')|Q(gender=''),is_club_member=False).all()
+        students = students.order_by( '-round','-gender')
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="malestudents.csv"'
         writer = csv.writer(response)
@@ -377,7 +384,8 @@ def MaleCSV(request):
     
 def FemaleCSV(request):
     if request.user.username == 'admin':
-        students = Inductees.objects.filter(is_club_member=False,gender='F',).all()#gender=f or gender = blank
+        students = Inductees.objects.filter(is_club_member=False,gender='F',).all()
+        students.order_by('-round')
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="femalestudents.csv"'
         writer = csv.writer(response)
