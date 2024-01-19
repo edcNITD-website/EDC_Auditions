@@ -63,7 +63,7 @@
                 <div id="students" class="flex flex-wrap justify-center mt-48 md:flex md:flex-wrap mb-36 group ">
                     {% for result in winners %}
                         <div id="student" data-student-id="{{ result.inductee.id }}"
-                        class=" w-full flex flex-col items-center p-6 md:mr-5 space-y-6 mb-20 rounded-xl bg-white/10 md:w-1/4 cursor-pointer group-hover:blur-sm hover:!blur-none group-hover:scale-[0.85] hover:!scale-100 duration-500 ">
+                        class=" w-full flex flex-col items-center p-6 md:mr-5 space-y-6 mb-20 rounded-xl bg-white/10 md:w-1/4 cursor-pointer group-hover:scale-[0.85] hover:!scale-100 duration-500 ">
                         <div class="flex flex-row -mt-14 items-center gap-4 ">
                             <img src="{{ result.inductee.profile_picture }}" class="w-16 mr-10 rounded-full" alt="">
                         </div>

@@ -29,7 +29,9 @@ def results(request):
     else:
         maxround = 0
     results = Result.objects.filter(round=maxround)
-    return render(request,'results.html',{'winners':results,'round':maxround})
+    student = get_object_or_404(Inductees, user = request.user)
+    admin = student.is_club_member
+    return render(request,'results.html',{'winners':results,'round':maxround,'admin':admin})
 
 def club_members(request):
     user = request.user
@@ -101,6 +103,8 @@ def student_profile(request,id):
 
 def details(request):
     if request.user.is_authenticated:
+        student = get_object_or_404(Inductees, user = request.user)
+        admin = student.is_club_member
         if request.method == 'POST':
             form = BasicDetailsForm(request.POST)
             if form.is_valid():
@@ -140,12 +144,15 @@ def details(request):
                 })
             else:
                 form = BasicDetailsForm()
-        return render(request, 'detailsform.html', {'form': form})
+        
+        return render(request, 'detailsform.html', {'form': form,'admin':admin})
     else:
         return render(request,'home.html',{'message':'Please login to continue'})
 
 def ques(request):
     if request.user.is_authenticated:
+        student = get_object_or_404(Inductees, user = request.user)
+        admin = student.is_club_member
         if Inductees.objects.filter(user=request.user).exists():
             student = get_object_or_404(Inductees, user = request.user)
             if student.registration_no=="":
@@ -179,7 +186,7 @@ def ques(request):
                     form = QuestionsForm(initial= formData)
                 else:
                     form = QuestionsForm()
-                return render(request, 'questions.html', {'form' : form})
+                return render(request, 'questions.html', {'form' : form,'admin':admin})
         else:
             return redirect('details')
     else:
