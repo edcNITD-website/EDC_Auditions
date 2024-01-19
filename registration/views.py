@@ -369,7 +369,7 @@ def handleSignUp(request):
     
 
 def MaleCSV(request):
-    if request.user.username == 'mine':
+    if request.user.username == 'admin':
         students = Inductees.objects.filter(Q(gender='M')|Q(gender=''),is_club_member=False).all()
         students = students.order_by( '-round','-gender')
         response = HttpResponse(content_type='text/csv')
