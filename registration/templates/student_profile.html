@@ -47,6 +47,13 @@
         background-color: #7fff16;
         margin: 4px;
     }
+    .circle-orange{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #ff9a16;
+        margin: 4px;
+    }
 </style>
 {% endblock css %}
 
@@ -139,7 +146,7 @@
          <div class="flex flex-col w-full justify-center">
             {% crispy form %}
          </div>
-         {% if allow > 3 %}
+         {% if allow > 2 %}
          <div class="flex items-center justify-center">
             <div class="flex flex-row gap-4">
                 <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="mark(1)">
@@ -150,6 +157,9 @@
                 </div>
                 <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="mark(3)">
                     <div class="circle-green"></div>
+                </div>
+                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="mark(5)">
+                    <div class="circle-orange"></div>
                 </div>
             </div>
         </div>

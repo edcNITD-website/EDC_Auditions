@@ -32,6 +32,20 @@
         background-color: #7fff16;
         margin: 4px;
     }
+    .circle-orange{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #ff9a16;
+        margin: 4px;
+    }
+    .circle-blue{
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #16aaff;
+        margin: 4px;
+    }
 </style>
 {% endblock css %}
 
@@ -89,6 +103,12 @@
                                 <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(3)">
                                     <div class="circle-green"></div>
                                 </div>
+                                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(5)">
+                                    <div class="circle-orange"></div>
+                                </div>
+                                <div class="bg-white/10 flex items-center justify-center mt-10 p-2 rounded-xl shine" onclick="filter(4)">
+                                    <div class="circle-blue"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -113,6 +133,9 @@
                             {% endif %}
                             {% if student.color == 1 %}
                             <img src="{% static 'assets/red.png' %}" class="w-6 h-6 mx-4 rounded-full" alt="">
+                            {% endif %}
+                            {% if student.color == 5 %}
+                            <img src="{% static 'assets/orange.png' %}" class="w-6 h-6 mx-4 rounded-full" alt="">
                             {% endif %}
                         </div>
                             <p class="text-sm text-white opacity-50 mr-4 ">
