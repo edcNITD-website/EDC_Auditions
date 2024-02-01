@@ -29,8 +29,11 @@ def results(request):
     else:
         maxround = 0
     results = Result.objects.filter(round=maxround)
-    student = get_object_or_404(Inductees, user = request.user)
-    admin = student.is_club_member
+    if request.user.is_authenticated:
+        student = get_object_or_404(Inductees, user = request.user)
+        admin = student.is_club_member
+    else:
+        admin = False
     return render(request,'results.html',{'winners':results,'round':maxround,'admin':admin})
 
 def club_members(request):
@@ -403,3 +406,24 @@ def FemaleCSV(request):
     else:
         return redirect('home')
     
+
+def getPosts(request):
+    #get posts from database in -date order and separate out max date people and search them on inductees and return them
+    if request.user.username == 'admin':
+        posts = Posts.objects.all().order_by('-date')
+        maxdate = posts[0].date
+        maxdateposts = posts.filter(date=maxdate)
+        students = []
+        for post in maxdateposts:
+            students.append(post.user)
+        #remove repetitions
+        students = list(dict.fromkeys(students))
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="recentstudents.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['Name', 'Roll Number', 'Department', 'Year', 'Domains', 'Round', 'Color','Phone Number','Gender'])
+        for student in students:
+            writer.writerow([student.full_name, student.rollnumber, student.department, student.year, student.domains, student.round, student.color, student.phone_number,student.gender])
+        return response
+    else:
+        return redirect('home')

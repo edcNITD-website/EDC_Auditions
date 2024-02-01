@@ -23,4 +23,5 @@ urlpatterns = [
     path('GraphicCSV', views.GdCSV, name="GraphicCSV"),
     path('MaleCSV', views.MaleCSV, name="MaleCSV"),
     path('FemaleCSV', views.FemaleCSV, name="FemaleCSV"),
+    path('RecentCSV', views.getPosts, name="RecentCSV"),
 ]
