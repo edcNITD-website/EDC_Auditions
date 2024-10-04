@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from . forms import BasicDetailsForm, QuestionsForm, PostsForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 import ast, csv
 from django.db.models import Q
@@ -41,8 +41,8 @@ def club_members(request):
     if user.is_authenticated:
         is_club_member = Inductees.objects.filter(user=user, is_club_member=True).exists()
         if is_club_member:
-            students = Inductees.objects.filter(is_club_member=False).order_by('-round')
-            return render(request, 'admin.html',{'students':students,'admin':True})
+            students = list(Inductees.objects.filter(is_club_member=False).order_by('-round').values())
+            return JsonResponse({"students": students, "admin": True})
         else:
             return render(request,'home.html',{'message':'You are not an admin :( '})       
     return render(request,'home.html',{'message':'Please login to continue'})
@@ -69,7 +69,7 @@ def search(request,search_term="",category=""):
                         students = Inductees.objects.filter(is_club_member=False)
                     else:
                         students = Inductees.objects.filter(is_club_member=False,department__icontains=search_term).order_by('-round')
-            return render(request, 'admin.html',{'students':students,'message':f'Search results for {search_term}','admin':True})
+            return JsonResponse({"students": list(students.values()), "admin": True})
     return redirect('home')
 
 def student_profile(request,id):
@@ -219,7 +219,7 @@ def filter(request,type):
         if is_club_member:
             if request.method=='GET':
                 students = Inductees.objects.filter(is_club_member=False,color = type).order_by('-round')
-            return render(request, 'admin.html',{'students':students})
+            return JsonResponse({"students": list(students.values()), "admin": True})
         else:
             return redirect('home')
     else:
