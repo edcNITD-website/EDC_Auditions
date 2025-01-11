@@ -1,8 +1,8 @@
 *.pyc  
 *~
 venv/
-env/
 db.sqlite3
 __pycache__/
 media
 registration/static/dist/styles.css
+migrations/
