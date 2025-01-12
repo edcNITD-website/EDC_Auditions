@@ -38,6 +38,9 @@ DEPARTMENT_CHOICES = [
     ("CE", "Civil Engineering"),
     ("CH", "Chemical Engineering"),
     ("MM", "Metallurgical and Materials Engineering"),
+    ("MC", "Mathematics and Computing"),
+    ("BT", "Biotechnology"),
+    ("CY", "Chemistry"),
 ]
 
 YEAR_CHOICES = [
