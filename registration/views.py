@@ -30,19 +30,18 @@ from rest_framework import status
 from rest_framework.response import Response as RestResponse
 
 from rest_framework.permissions import BasePermission, IsAuthenticated
+from django.views.generic import TemplateView
 
 
 class IsClubMember(BasePermission):
     def has_permission(self, request, view):
         return request.user.is_authenticated and request.user.inductees.is_club_member
-        print("hello")
-        return request.data.is_authenticated
- 
-        return request.user.inductees.is_club_member
 
 
 # TODO: use viewsets in future for restful api
 
+class Root(TemplateView):
+    template_name = "root.html"
 
 class UserSignupView(generics.CreateAPIView):
     serializer_class = SignupSerializer
@@ -94,8 +93,28 @@ class InducteesDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Inductees.objects.all().filter(is_club_member=False)
     serializer_class = InducteesSerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsClubMember]
-    # permission_classes = [IsAdminUser, IsAuthenticated]
+    permission_classes = [IsAuthenticated]  # Base authentication applies to all users
+
+    def get_queryset(self):
+        user = self.request.user
+
+        # Club members can access all inductees
+        if IsClubMember().has_permission(self.request, self):
+            return Inductees.objects.all()
+
+        # Regular users can only access their own data
+        return Inductees.objects.filter(user=user)
+
+    def get_object(self):
+        """
+        Ensure that users can only retrieve their own data unless they are a club member.
+        """
+        obj = super().get_object()
+
+        # Restrict access to the user's own data unless they are a club member
+        if not IsClubMember().has_permission(self.request, self) and obj.user != self.request.user:
+            raise PermissionDenied("You are not allowed to access this user's details.")
+        return obj
 
 
 class QuestionListCreateView(generics.ListCreateAPIView):
@@ -114,15 +133,13 @@ class QuestionDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     authentication_classes = [JWTAuthentication]
-
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsClubMember]
 
 
 class ResultListView(generics.ListAPIView):
     queryset = Result.objects.all()
     serializer_class = ResultSerializer
-    # permission_classes = [IsAuthenticated, IsAuthenticated]
-
+    
 
 class ClubMembersListCreateView(generics.ListCreateAPIView):
     queryset = Inductees.objects.all().filter(is_club_member=True)
@@ -135,7 +152,6 @@ class PostsListCreateView(generics.ListCreateAPIView):
     serializer_class = PostsSerializer
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsClubMember]
-    # permission_classes = [IsAuthenticated]
 
 
 class PostsByUser(generics.ListAPIView):
@@ -146,42 +162,25 @@ class PostsByUser(generics.ListAPIView):
         return Posts.objects.filter(user=user_id)
 
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated, IsClubMember]
+    permission_classes = [IsClubMember]
 
 
 class ResponseListCreateView(generics.ListCreateAPIView):
-    queryset = Response.objects.all()
     serializer_class = ResponseSerializer
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated, IsClubMember]
-    # permission_classes = [IsAuthenticated]
 
-    # def perform_create(self, serializer):
-    #     try:
-    #         student = self.request.user.inductees
-    #         serializer.save(student=student)
-    #     except Exception as e:
-    #        print("User does not have an inductee profile", e)
-
-    # def perform_create(self, serializer):
-    #     if hasattr(self.request.user, 'inductees'):
-    #         student = self.request.user.inductees
-    #         response = serializer.save(student=student)
-    #         print(f"Response saved: {response}")  # Debug log
-    #     else:
-    #         raise serializers.ValidationError({"error": "User does not have an inductee profile"})
-
-
-# class ResponseDetailView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Response.objects.all()
-#     serializer_class = ResponseSerializer
-#     # permission_classes = [IsAuthenticated, IsAuthenticated]
+    def get_queryset(self):
+        user = self.request.user
+        if IsClubMember().has_permission(self.request, self):
+            return Response.objects.all()
+        return Response.objects.filter(student=user.inductees)
+    
+    permission_classes = [IsAuthenticated]
 
 
 class ResponseByUser(generics.ListAPIView):
     serializer_class = ResponseSerializer
     authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated, IsClubMember]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user_id = self.kwargs["user_id"]
@@ -191,13 +190,14 @@ class ResponseByUser(generics.ListAPIView):
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
+
 class ResultsList(generics.ListAPIView):
     queryset = Inductees.objects.all().filter(color = 3)
     serializer_class = InducteesSerializer
 
 
 @api_view(["GET"])
-# @permission_classes([IsAdminUser, IsAuthenticated])
+@permission_classes([IsClubMember])
 def export_to_csv(request):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = 'attachment; filename="inductees.csv"'
@@ -231,13 +231,14 @@ def export_to_csv(request):
         inductees = inductees.filter(domains__icontains=domain)
 
     for inductee in inductees:
+        if inductee.full_name == "" or inductee.full_name == None:
+            continue 
         writer.writerow(
             [
                 inductee.full_name,
                 inductee.rollnumber,
                 inductee.department,
                 inductee.year,
-                inductee.domains,
                 inductee.round,
                 inductee.color,
                 inductee.phone_number,
