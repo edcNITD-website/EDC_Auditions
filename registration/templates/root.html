@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .status-bar {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            color: white;
+        }
+
+        .status-dot {
+            height: 10px;
+            width: 10px;
+            background-color: rgb(0, 255, 0);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        img {
+            height: 50vh;
+            width: auto;
+        }
+
+        .box {
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: Arial, sans-serif; /* Change font here */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <img src="https://edcnitd.co.in/static/img/logo.png" alt="EDC Logo">
+        <div class="status-bar">
+            <div class="box">
+                <span class="status-dot"></span>
+                <span>Status: Online</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
