@@ -111,7 +111,7 @@ class Question(models.Model):
 class Response(models.Model):
     student = models.ForeignKey(Inductees, on_delete=models.CASCADE)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answer = models.CharField(max_length=100)
+    answer = models.CharField(max_length=1000)
 
     class Meta:
         unique_together = ["student", "question"]
