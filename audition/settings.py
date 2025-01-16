@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'registration.middleware.GlobalRateLimitMiddleware',
 ]
 
 ROOT_URLCONF = 'audition.urls'
