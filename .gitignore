@@ -6,3 +6,5 @@ __pycache__/
 media
 registration/static/dist/styles.css
 migrations/
+staticfiles/
+access_logs.txt
