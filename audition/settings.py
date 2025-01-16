@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-1n4-__*bj&c(nxq@&p0_y5+y%0emw48b*=2d3vsm&j@ykdo5fu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['13.233.12.242', 'hult.edcnitd.co.in']
 
 
 # Application definition
@@ -202,10 +202,11 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_ALL_ORIGINS = True
 
 # Allow specific frontend origins
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "https://your-production-frontend.com",
-# ]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://audition.edcnitd.co.in",
+    "https://audtions-page.vercel.app"
+]
